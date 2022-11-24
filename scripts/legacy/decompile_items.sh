@@ -12,7 +12,7 @@ export elements="C:/Users/llegay/AppData/Local/Ankama/Dofus/content/maps/element
 export maps="C:/Users/llegay/AppData/Local/Ankama/Dofus/content/maps/"
 
 export pydofusPath="C:/Users/llegay/Desktop/pydofus/PyDofus"
-export sourcesPath="C:/Users/llegay/Desktop/BOT/LaBot/sources"
+export sourcesPath="C:/Users/llegay/Desktop/MITM/mitm_d2/sources"
 
 
 # rm "$pydofusPath/output/"*"/"*"/"*".dlm"
