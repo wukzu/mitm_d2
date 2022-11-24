@@ -1,0 +1,78 @@
+-- Déplacement: [2, 6] ( 0 hits)
+
+-- Déplacement: [3, 6] ( 0 hits)
+
+-- Déplacement: [3, 7] ( 0 hits)
+
+-- Déplacement: [4, 2] ( 0 hits)
+
+-- Déplacement: [4, 4] ( 0 hits)
+
+-- Déplacement: [4, 5] ( 0 hits)
+
+-- Déplacement: [4, 6] ( 0 hits)
+
+-- Déplacement: [4, 7] ( 0 hits)
+
+-- Déplacement: [4, 8] ( 0 hits)
+
+-- Déplacement: [5, 1] ( 0 hits)
+
+-- Déplacement: [5, 2] ( 0 hits)
+
+-- Déplacement: [5, 3] ( 0 hits)
+
+-- Déplacement: [5, 4] ( 0 hits)
+
+-- Déplacement: [5, 5] ( 0 hits)
+
+-- Déplacement: [5, 6] ( 0 hits)
+
+-- Déplacement: [5, 7] ( 0 hits)
+
+-- Déplacement: [5, 8] ( 0 hits)
+
+-- Déplacement: [5, 9] ( 0 hits)
+
+-- Déplacement: [6, 2] ( 0 hits)
+
+-- Déplacement: [6, 4] ( 0 hits)
+
+-- Déplacement: [6, 5] ( 0 hits)
+
+-- Déplacement: [6, 6] ( 0 hits)
+
+-- Déplacement: [6, 7] ( 0 hits)
+
+-- Déplacement: [6, 8] ( 0 hits)
+
+-- Déplacement: [7, 3] ( 1 hits)
+- Hit: [6, 3]
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - M X - - - - - 
+- - - X X - - - - - 
+- - - X - - - - - - 
+- - - - - P - - - - 
+- - - H - - - - - - 
+- - - D - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+
+
+-- Déplacement: [7, 4] ( 0 hits)
+
+-- Déplacement: [7, 5] ( 0 hits)
+
+-- Déplacement: [7, 6] ( 0 hits)
+
+-- Déplacement: [7, 7] ( 0 hits)
+
+-- Déplacement: [8, 4] ( 0 hits)
+
+-- Déplacement: [8, 5] ( 0 hits)
+
+-- Déplacement: [8, 6] ( 0 hits)
+
+-- Déplacement: [9, 5] ( 0 hits)
+
