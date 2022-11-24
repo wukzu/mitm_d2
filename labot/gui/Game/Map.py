@@ -1,6 +1,8 @@
 from ..utils.FileReader import FileReader
 from ..utils.Constants import Constants
+from ..utils.Sockets import Socket
 import time
+import json
 
 class Map:
     def __init__(self, gui):
@@ -13,6 +15,7 @@ class Map:
 
         self.nonWalkableCells = []
         self.wallCells = []
+        self.zaap = {}
 
         self.nonWalkableCellList = []
         self.wallCellList = []
@@ -42,12 +45,16 @@ class Map:
     
     def socketHandler(self, action, data):
 
+        if action == 'mapHavenBagInformations':
+            self.zaap = data['zaap']
+
         if action == 'mapInformations':
             self.mapId = data['mapId']
             self.subAreaId = data['subAreaId']
             self.setMonsters(data['monsters'])
             self.fightStartCells = data['fightStartCells']
             self.getNonWalkableCells(int(data['mapId']))
+            self.zaap = data['zaap']
             
         if action == 'updateActorPosition':
             for group in self.monsters:
@@ -113,32 +120,30 @@ class Map:
                     self.wallCellList.append([x, y])
 
     def routeToMountStable(self):
-        self.Gui.qSocket.put(("enterHavenBag", ""))
+        
+        self.Gui.qSocket.put(Socket.EnterHavenBag(self.Gui.Player.id))
+        
         self.Gui.waitCallback("mapHavenBagInformations")
         time.sleep(1000/1000)
 
-        self.Gui.qSocket.put(("useHavenBagZaap", ""))
-        print(">>> MAP : PUTTED useHavenBagZaap")
+        self.Gui.qSocket.put(Socket.useHavenbagZaap(self.zaap))
         self.Gui.waitCallback('ZaapDestinationsMessage')
-        print("--- MAP: end wait")
+        
         time.sleep(1000/1000)
 
-        self.Gui.qSocket.put(("teleportBrakmarZaap", ""))
-        print(">>> MAP : PUTTED teleportBrakmarZaap")
+        self.Gui.qSocket.put(Socket.teleportBrakmar())
         self.Gui.waitCallback('mapInformations')
-        print("--- MAP: end wait")
+        
         time.sleep(2)
 
         self.Gui.Window.clickCellId(65) # Clique sur Zappi 
-        print(">>> MAP : PUTTED moveToCellId 63")
         self.Gui.waitCallback('TeleportDestinationsMessage')
-        print("--- MAP: end wait")
+        
         time.sleep(1000/1000)
 
-        self.Gui.qSocket.put(("teleportStableZaapi", ""))
-        print(">>> MAP : PUTTED teleportStableZaapi")
+        self.Gui.qSocket.put(Socket.teleportAnimals())
         self.Gui.waitCallback('mapInformations')
-        print("--- MAP: end wait")
+        
         time.sleep(1000/1000)
 
         self.Gui.Player.moveToCellId(314)

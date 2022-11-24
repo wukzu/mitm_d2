@@ -97,13 +97,21 @@ def handleMessage(Bridge, name, data):
 
     else:
         if name == 'MapComplementaryInformationsDataInHavenBagMessage':
-            
+            zaapElementId = 0
+            zaapSkillInstanceUid = 0
+
             for element in data['interactiveElements']:
                 if element['elementTypeId'] == 16:  # Zaap
-                    Bridge.zaap['elementId'] = element['elementId']
-                    Bridge.zaap['skillInstanceUid'] = element['enabledSkills'][0]['skillInstanceUid']
+                    zaapElementId = element['elementId']
+                    zaapSkillInstanceUid = element['enabledSkills'][0]['skillInstanceUid']
                     break
-            Bridge.qForm.put(("mapHavenBagInformations", ""))
+            
+            Bridge.qForm.put(("mapHavenBagInformations", dictToString({
+                'zaap': {
+                    'elementId': zaapElementId,
+                    'skillInstanceUid': zaapSkillInstanceUid
+                }
+            })))
 
         if name == 'ZaapDestinationsMessage':
             Bridge.qForm.put(("ZaapDestinationsMessage", ""))
@@ -122,12 +130,25 @@ def handleMessage(Bridge, name, data):
                 print("Put Initialized")
                 Bridge.qForm.put(("Initialized", ""))
                 Bridge.initialized = True
+            
+            zaapElementId = 0
+            zaapSkillInstanceUid = 0
+
+            for element in data['interactiveElements']:
+                if element['elementTypeId'] == 16:  # Zaap
+                    zaapElementId = element['elementId']
+                    zaapSkillInstanceUid = element['enabledSkills'][0]['skillInstanceUid']
+                    break
 
             mapInfos = dictToString({
                 'mapId': int(data['mapId']),
                 'subAreaId': int(data['subAreaId']),
                 'monsters': getMonsters(data),
-                'fightStartCells': data['fightStartPositions']['positionsForChallengers']
+                'fightStartCells': data['fightStartPositions']['positionsForChallengers'],
+                'zaap': {
+                    'elementId': zaapElementId,
+                    'skillInstanceUid': zaapSkillInstanceUid
+                }
             })
             Bridge.qForm.put(("mapInformations", mapInfos))
             try:
@@ -524,40 +545,11 @@ class InjectorBridgeHandler(BridgeHandler):
             time.sleep(50/1000)
             if not self.qSocket.empty():
                 #self.socketON = False
-                action, data = self.qSocket.get()
-                infos = {}
-                if data != "":
-                    infos = json.loads(data)
+                action, infos = self.qSocket.get()
 
-                print("------- MESSAGE : " + str(action)  + " - data: " + str(data))
-                if action == 'useSpell':
-                    spellId = infos['spellId']
-                    cellId = infos['cellId']
-                    self.use_spell(spellId, cellId)
-                if action == 'passTurn':
-                    self.pass_turn()
-
-                if action == 'fightSetReady':
-                    self.set_fight_ready()
-
-                if action == "activateParsedLogs":
-                    self.parsedLogActivated = True
-                if action == "deactivateParsedLogs":
-                    self.parsedLogActivated = False
-                if action == "activateLogs":
-                    self.logActivated = True
-                if action == "deactivateLogs":
-                    self.logActivated = False
-
-                if action == "enterHavenBag":
-                    self.enter_haven_bag()
-                if action == "useHavenBagZaap":
-                    self.use_haven_bag_zaap()
-                if action == "teleportBrakmarZaap":
-                    self.teleport_brakmar_zaap()
-
-                if action == "teleportStableZaapi":
-                    self.teleport_stable_zaapi()
+                print("------- MESSAGE : " + str(action)  + " - data: " + str(infos))
+                if action == "sendMessage":
+                    self.send_socket(infos)
 
 
     def send_to_client(self, data):
@@ -574,77 +566,28 @@ class InjectorBridgeHandler(BridgeHandler):
         with self.lock:
             self.coSer.sendall(data)
 
-    def teleport_stable_zaapi(self):
-        print("() Method teleport_brakmar_zaap()")
-        msg = Msg.from_json(
-            {'__type__': 'TeleportRequestMessage', 'sourceType': 1, 'destinationType': 1, 'mapId': 212862469.0}
-        )
-        try:
-            self.send_to_server(msg)
-        except:
-            print("FAILED : on reesssait ")
-            self.qSocket.put(("teleportStableZaapi", ""))
+    
 
-    def teleport_brakmar_zaap(self):
-        print("() Method teleport_brakmar_zaap()")
-        msg = Msg.from_json(
-            {'__type__': 'TeleportRequestMessage', 'sourceType': 3, 'destinationType': 0, 'mapId': 212861955.0}
-        )
-        try:
-            self.send_to_server(msg)
-        except:
-            print("FAILED : on reesssait ")
-            self.qSocket.put(("teleportBrakmarZaap", ""))
+    def send_socket(self, infos):
 
-    def use_haven_bag_zaap(self):
-        print("() Method use_haven_bag_zaap()")
-        msg = Msg.from_json(
-            {'__type__': 'InteractiveUseRequestMessage', 'elemId': self.zaap['elementId'], 'skillInstanceUid': self.zaap['skillInstanceUid']}
-        )
-        try:
-            self.send_to_server(msg)
-        except:
-            print("FAILED : on reesssait ")
-            self.qSocket.put(("useHavenBagZaap", ""))
-
-    def enter_haven_bag(self):
-        print("() Method enter_haven_bag()")
-        msg = Msg.from_json(
-            {"__type__": "EnterHavenBagRequestMessage", "havenBagOwner": self.actorId}
-        )
-        try:
-            self.send_to_server(msg)
-        except:
-            print("FAILED : on reesssait ")
-            self.qSocket.put(("enterHavenBag", ""))
-
-
-    def pass_turn(self):
-        print("() Method pass_turn()")
-        msg = Msg.from_json(
-            {"__type__": "GameFightTurnFinishMessage", "isAfk": False}
-        )
-        try:
-            self.send_to_server(msg)
-        except:
-            print("FAILED : on reesssait ")
-            self.qSocket.put(("passTurn", ""))
-
-    def use_spell(self, spellId, cellId):
+        data = {}
+        if infos != "":
+            data = json.loads(infos)
         #self.packetThread.join()
-        print("() Method useSpell()")
+        messageName = data['messageName']
+        extraData = data['data']
+
+        print("() Method send_socket()", messageName, extraData)
         msg = Msg.from_json(
-            {"__type__": "GameActionFightCastRequestMessage", "spellId": int(spellId), "cellId": int(cellId)}
+            {"__type__": messageName, **extraData}
         )
         try:
             self.send_to_server(msg)
-            self.spellCasted = True
+            if messageName == "GameActionFightCastRequestMessage":
+                self.spellCasted = True
         except:
             print("FAILED : on reesssait ")
-            self.qSocket.put(("useSpell", json.dumps({
-                'spellId': spellId,
-                'cellId': cellId
-            })))
+            self.qSocket.put(("sendMessage", infos))
 
     def set_fight_ready(self):
         msg = Msg.from_json(
@@ -676,21 +619,21 @@ class InjectorBridgeHandler(BridgeHandler):
                 % (msgType, parsedMsg, msg.data)
             )
 
-            if protocol.msg_from_id[msg.id]["name"] not in self.blackList:
-                if from_client:
-                    logger.info(
-                        ("-- SENT - [%(count)i] %(name)s (%(size)i Bytes)"),
-                        dict(
-                            count=msg.count,
-                            name=protocol.msg_from_id[msg.id]["name"],
-                            size=len(msg.data),
-                        ),
-                    )
-                else:
-                    logger.info(
-                        ("RECV - %(name)s (%(size)i Bytes)"),
-                        dict(name=protocol.msg_from_id[msg.id]["name"], size=len(msg.data)),
-                    )
+            # if protocol.msg_from_id[msg.id]["name"] not in self.blackList:
+            #     if from_client:
+            #         logger.info(
+            #             ("-- SENT - [%(count)i] %(name)s (%(size)i Bytes)"),
+            #             dict(
+            #                 count=msg.count,
+            #                 name=protocol.msg_from_id[msg.id]["name"],
+            #                 size=len(msg.data),
+            #             ),
+            #         )
+            #     else:
+            #         logger.info(
+            #             ("RECV - %(name)s (%(size)i Bytes)"),
+            #             dict(name=protocol.msg_from_id[msg.id]["name"], size=len(msg.data)),
+            #         )
                 
             #     print(parsedMsg)
             #     print()

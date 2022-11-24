@@ -1,6 +1,7 @@
 
 from ..Algorithm.FightAlgorithm import FightAlgorithm
 from ..utils.Constants import Constants as Constants
+from ..utils.Sockets import Socket
 import json
 import math as Math
 
@@ -29,8 +30,8 @@ class Fight:
                 return monster['id']
 
     def passTurn(self):
-         print('---->>>> sending PASS TURN')
-         self.Gui.qSocket.put(("passTurn", ""))
+        print('---->>>> sending PASS TURN')
+        self.Gui.qSocket.put(Socket.fightPassTurn())
 
     def useSpell(self, spellId, cellId):
         print('---->>>> sending useSpell', spellId, cellId)
@@ -45,13 +46,11 @@ class Fight:
         
         self.spellsCasted.append(int(spellId))
 
-        self.Gui.qSocket.put(("useSpell", json.dumps({
-            'spellId': spellId,
-            'cellId': cellId
-        })))
+        self.Gui.qSocket.put(Socket.useSpell(spellId, cellId))
 
     def setFightReady(self):
-        self.Gui.qSocket.put(("fightSetReady", ""))
+        print('---->>>> sending PASS TURN')
+        self.Gui.qSocket.put(Socket.setFightReady())
 
     def getDistance(self, X1, Y1, X2, Y2):
         dist = Math.fabs(X2 - X1) + Math.fabs(Y2 - Y1)
