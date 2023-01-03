@@ -12,6 +12,7 @@ from .Window.Window import Window
 from .Game.Map import Map
 from .Game.Player import Player
 from .Game.Fight import Fight
+from .Game.Mount import Mount
 
 class GUI(threading.Thread):
     
@@ -25,6 +26,7 @@ class GUI(threading.Thread):
         self.Map = None
         self.Player = None
         self.Fight = None
+        self.Mount = None
 
         self.fnQuit = fnQuit
         
@@ -40,6 +42,7 @@ class GUI(threading.Thread):
         self.Map = Map(self)
         self.Player = Player(self)
         self.Fight = Fight(self, self.Player, self.Map)
+        self.Mount = Mount(self)
 
         self.callbackToWait = ""
 
@@ -254,5 +257,6 @@ class GUI(threading.Thread):
             self.Map.socketHandler(action, infos)
             self.Player.socketHandler(action, infos)
             self.Fight.socketHandler(action, infos)
+            self.Mount.socketHandler(action, infos)
 
         self.root.after(50, self.check_queue)

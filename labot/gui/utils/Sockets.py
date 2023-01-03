@@ -65,4 +65,29 @@ class Socket:
             }
         }))
     
+    def rideMount(mountId):
+        return ("sendMessage", json.dumps({
+            'messageName': 'ExchangeHandleMountsMessage',
+            'data': {
+                'actionType': 2,
+                'ridesId': [mountId]
+            }
+        }))
     
+    def rideMountOnPlayer():
+        return ("sendMessage", json.dumps({
+            'messageName': 'MountToggleRidingRequestMessage',
+            'data': {}
+        }))
+    
+    def mountSetXpRatio(ratio): 
+        return ("sendMessage", json.dumps({
+            'messageName': 'MountSetXpRatioRequestMessage',
+            'data': {
+                'xpRatio': 90
+            }
+        }))
+
+    print("----------- end callback")
+
+

@@ -1,8 +1,8 @@
 
-import win32gui
+# import win32gui
 
-import win32api
-import win32con
+# import win32api
+# import win32con
 
 import time
 
@@ -81,19 +81,19 @@ def idToPix(id, onCroppedScreen, delta_x=0, delta_y=0):
 
 
 
-GameWindow = win32gui.FindWindow(None, "Lorienta - Dofus 2.65.5.16")
+# GameWindow = win32gui.FindWindow(None, "Lorienta - Dofus 2.66.1.11")
 
-win32gui.MoveWindow(GameWindow, -8, 0, 716, 600, True)
+# win32gui.MoveWindow(GameWindow, -8, 0, 716, 600, True)
 
 
 
-x,y = idToPix(7, False)
-print(x)
-print(y)
+# x,y = idToPix(7, False)
+# print(x)
+# print(y)
 
-time.sleep(2)
+# time.sleep(2)
 
-lParam = win32api.MAKELONG(x, y)
-win32api.PostMessage(GameWindow, win32con.WM_MOUSEMOVE, win32con.MK_LBUTTON, lParam)
-win32api.PostMessage(GameWindow, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, lParam)
-win32api.PostMessage(GameWindow, win32con.WM_LBUTTONUP, None, lParam)
+
+import json
+
+print(idToPix(41, False))

@@ -1,0 +1,555 @@
+{
+  "__type__": "MapComplementaryInformationsDataMessage",
+  "subAreaId": 601,
+  "mapId": 54170407.0,
+  "houses": [
+    {
+      "__type__": "HouseOnMapInformations",
+      "houseId": 10737,
+      "modelId": 328,
+      "doorsOnMap": [
+        456882
+      ],
+      "houseInstances": [
+        {
+          "__type__": "HouseInstanceInformations",
+          "secondHand": False,
+          "isLocked": True,
+          "hasOwner": True,
+          "isSaleLocked": False,
+          "instanceId": 1,
+          "ownerTag": {
+            "__type__": "AccountTagInformation",
+            "nickname": "Ircas",
+            "tagNumber": "9944"
+          },
+          "price": 0
+        }
+      ]
+    },
+    {
+      "__type__": "HouseOnMapInformations",
+      "houseId": 10738,
+      "modelId": 317,
+      "doorsOnMap": [
+        456883
+      ],
+      "houseInstances": [
+        {
+          "__type__": "HouseInstanceInformations",
+          "secondHand": True,
+          "isLocked": True,
+          "hasOwner": True,
+          "isSaleLocked": False,
+          "instanceId": 1,
+          "ownerTag": {
+            "__type__": "AccountTagInformation",
+            "nickname": "Louis-de-funeste",
+            "tagNumber": "9947"
+          },
+          "price": 12989999
+        }
+      ]
+    },
+    {
+      "__type__": "HouseOnMapInformations",
+      "houseId": 10736,
+      "modelId": 325,
+      "doorsOnMap": [
+        456881
+      ],
+      "houseInstances": [
+        {
+          "__type__": "HouseInstanceInformations",
+          "secondHand": False,
+          "isLocked": True,
+          "hasOwner": True,
+          "isSaleLocked": False,
+          "instanceId": 1,
+          "ownerTag": {
+            "__type__": "AccountTagInformation",
+            "nickname": "Manarile",
+            "tagNumber": "4855"
+          },
+          "price": 0
+        }
+      ]
+    }
+  ],
+  "actors": [
+    {
+      "__type__": "GameRolePlayCharacterInformations",
+      "contextualId": 115831800030.0,
+      "disposition": {
+        "__type__": "EntityDispositionInformations",
+        "cellId": 11,
+        "direction": 2
+      },
+      "look": {
+        "__type__": "EntityLook",
+        "bonesId": 639,
+        "skins": [],
+        "indexedColors": [
+          33554416,
+          50285787,
+          67043558,
+          74867779
+        ],
+        "scales": [
+          120
+        ],
+        "subentities": [
+          {
+            "__type__": "SubEntity",
+            "bindingPointCategory": 2,
+            "bindingPointIndex": 0,
+            "subEntityLook": {
+              "__type__": "EntityLook",
+              "bonesId": 2,
+              "skins": [
+                91,
+                2149,
+                3021,
+                3357,
+                3841,
+                970
+              ],
+              "indexedColors": [
+                33538919,
+                33554432,
+                50866292,
+                67108864,
+                83886080
+              ],
+              "scales": [
+                135
+              ],
+              "subentities": []
+            }
+          }
+        ]
+      },
+      "name": "Lorienta",
+      "humanoidInfo": {
+        "__type__": "HumanInformations",
+        "restrictions": {
+          "__type__": "ActorRestrictionsInformations",
+          "cantBeAggressed": False,
+          "cantBeChallenged": False,
+          "cantTrade": False,
+          "cantBeAttackedByMutant": False,
+          "cantRun": False,
+          "forceSlowWalk": False,
+          "cantMinimize": False,
+          "cantMove": False,
+          "cantAggress": False,
+          "cantChallenge": False,
+          "cantExchange": False,
+          "cantAttack": True,
+          "cantChat": False,
+          "cantBeMerchant": False,
+          "cantUseObject": False,
+          "cantUseTaxCollector": False,
+          "cantUseInteractive": False,
+          "cantSpeakToNPC": False,
+          "cantChangeZone": False,
+          "cantAttackMonster": False
+        },
+        "sex": True,
+        "options": [
+          {
+            "__type__": "HumanOptionTitle",
+            "titleId": 79,
+            "titleParam": ""
+          },
+          {
+            "__type__": "HumanOptionOrnament",
+            "ornamentId": 99,
+            "level": 184,
+            "leagueId": 65535,
+            "ladderPosition": -1
+          },
+          {
+            "__type__": "HumanOptionSpeedMultiplier",
+            "speedMultiplier": 1
+          }
+        ]
+      },
+      "accountId": 39286155,
+      "alignmentInfos": {
+        "__type__": "ActorAlignmentInformations",
+        "alignmentSide": 0,
+        "alignmentValue": 0,
+        "alignmentGrade": 0,
+        "characterPower": 115831800214.0
+      }
+    },
+    {
+      "__type__": "GameRolePlayGroupMonsterInformations",
+      "contextualId": -20002.0,
+      "disposition": {
+        "__type__": "EntityDispositionInformations",
+        "cellId": 129,
+        "direction": 7
+      },
+      "look": {
+        "__type__": "EntityLook",
+        "bonesId": 1239,
+        "skins": [],
+        "indexedColors": [],
+        "scales": [
+          115
+        ],
+        "subentities": []
+      },
+      "keyRingBonus": False,
+      "hasHardcoreDrop": False,
+      "hasAVARewardToken": False,
+      "staticInfos": {
+        "__type__": "GroupMonsterStaticInformations",
+        "mainCreatureLightInfos": {
+          "__type__": "MonsterInGroupLightInformations",
+          "genericId": 2893,
+          "grade": 1,
+          "level": 80
+        },
+        "underlings": [
+          {
+            "__type__": "MonsterInGroupInformations",
+            "genericId": 2914,
+            "grade": 4,
+            "level": 90,
+            "look": {
+              "__type__": "EntityLook",
+              "bonesId": 1291,
+              "skins": [],
+              "indexedColors": [],
+              "scales": [],
+              "subentities": []
+            }
+          },
+          {
+            "__type__": "MonsterInGroupInformations",
+            "genericId": 2914,
+            "grade": 2,
+            "level": 86,
+            "look": {
+              "__type__": "EntityLook",
+              "bonesId": 1291,
+              "skins": [],
+              "indexedColors": [],
+              "scales": [],
+              "subentities": []
+            }
+          },
+          {
+            "__type__": "MonsterInGroupInformations",
+            "genericId": 2913,
+            "grade": 2,
+            "level": 90,
+            "look": {
+              "__type__": "EntityLook",
+              "bonesId": 1299,
+              "skins": [],
+              "indexedColors": [],
+              "scales": [
+                150
+              ],
+              "subentities": []
+            }
+          }
+        ]
+      },
+      "lootShare": -1,
+      "alignmentSide": -1
+    },
+    {
+      "__type__": "GameRolePlayGroupMonsterInformations",
+      "contextualId": -20003.0,
+      "disposition": {
+        "__type__": "EntityDispositionInformations",
+        "cellId": 60,
+        "direction": 1
+      },
+      "look": {
+        "__type__": "EntityLook",
+        "bonesId": 1239,
+        "skins": [],
+        "indexedColors": [],
+        "scales": [
+          115
+        ],
+        "subentities": []
+      },
+      "keyRingBonus": False,
+      "hasHardcoreDrop": False,
+      "hasAVARewardToken": False,
+      "staticInfos": {
+        "__type__": "GroupMonsterStaticInformations",
+        "mainCreatureLightInfos": {
+          "__type__": "MonsterInGroupLightInformations",
+          "genericId": 2893,
+          "grade": 2,
+          "level": 82
+        },
+        "underlings": [
+          {
+            "__type__": "MonsterInGroupInformations",
+            "genericId": 2913,
+            "grade": 1,
+            "level": 88,
+            "look": {
+              "__type__": "EntityLook",
+              "bonesId": 1299,
+              "skins": [],
+              "indexedColors": [],
+              "scales": [
+                150
+              ],
+              "subentities": []
+            }
+          },
+          {
+            "__type__": "MonsterInGroupInformations",
+            "genericId": 2892,
+            "grade": 4,
+            "level": 98,
+            "look": {
+              "__type__": "EntityLook",
+              "bonesId": 1240,
+              "skins": [],
+              "indexedColors": [],
+              "scales": [
+                140
+              ],
+              "subentities": []
+            }
+          },
+          {
+            "__type__": "MonsterInGroupInformations",
+            "genericId": 2913,
+            "grade": 2,
+            "level": 90,
+            "look": {
+              "__type__": "EntityLook",
+              "bonesId": 1299,
+              "skins": [],
+              "indexedColors": [],
+              "scales": [
+                150
+              ],
+              "subentities": []
+            }
+          },
+          {
+            "__type__": "MonsterInGroupInformations",
+            "genericId": 2893,
+            "grade": 1,
+            "level": 80,
+            "look": {
+              "__type__": "EntityLook",
+              "bonesId": 1239,
+              "skins": [],
+              "indexedColors": [],
+              "scales": [
+                115
+              ],
+              "subentities": []
+            }
+          }
+        ]
+      },
+      "lootShare": -1,
+      "alignmentSide": -1
+    },
+    {
+      "__type__": "GameRolePlayGroupMonsterInformations",
+      "contextualId": -20001.0,
+      "disposition": {
+        "__type__": "EntityDispositionInformations",
+        "cellId": 116,
+        "direction": 7
+      },
+      "look": {
+        "__type__": "EntityLook",
+        "bonesId": 1291,
+        "skins": [],
+        "indexedColors": [],
+        "scales": [],
+        "subentities": []
+      },
+      "keyRingBonus": False,
+      "hasHardcoreDrop": False,
+      "hasAVARewardToken": False,
+      "staticInfos": {
+        "__type__": "GroupMonsterStaticInformations",
+        "mainCreatureLightInfos": {
+          "__type__": "MonsterInGroupLightInformations",
+          "genericId": 2914,
+          "grade": 2,
+          "level": 86
+        },
+        "underlings": [
+          {
+            "__type__": "MonsterInGroupInformations",
+            "genericId": 2913,
+            "grade": 5,
+            "level": 96,
+            "look": {
+              "__type__": "EntityLook",
+              "bonesId": 1299,
+              "skins": [],
+              "indexedColors": [],
+              "scales": [
+                150
+              ],
+              "subentities": []
+            }
+          }
+        ]
+      },
+      "lootShare": -1,
+      "alignmentSide": -1
+    }
+  ],
+  "interactiveElements": [
+    {
+      "__type__": "InteractiveElement",
+      "elementId": 456882,
+      "elementTypeId": 300,
+      "enabledSkills": [
+        {
+          "__type__": "InteractiveElementSkill",
+          "skillId": 84,
+          "skillInstanceUid": 146427945
+        }
+      ],
+      "disabledSkills": [],
+      "onCurrentMap": True
+    },
+    {
+      "__type__": "InteractiveElement",
+      "elementId": 463714,
+      "elementTypeId": -1,
+      "enabledSkills": [
+        {
+          "__type__": "InteractiveElementSkill",
+          "skillId": 198,
+          "skillInstanceUid": 146387304
+        }
+      ],
+      "disabledSkills": [],
+      "onCurrentMap": True
+    },
+    {
+      "__type__": "InteractiveElement",
+      "elementId": 456883,
+      "elementTypeId": 300,
+      "enabledSkills": [
+        {
+          "__type__": "InteractiveElementSkill",
+          "skillId": 84,
+          "skillInstanceUid": 146428340
+        },
+        {
+          "__type__": "InteractiveElementSkill",
+          "skillId": 97,
+          "skillInstanceUid": 146428343
+        }
+      ],
+      "disabledSkills": [],
+      "onCurrentMap": True
+    },
+    {
+      "__type__": "InteractiveElement",
+      "elementId": 456881,
+      "elementTypeId": 300,
+      "enabledSkills": [
+        {
+          "__type__": "InteractiveElementSkill",
+          "skillId": 84,
+          "skillInstanceUid": 146426505
+        }
+      ],
+      "disabledSkills": [],
+      "onCurrentMap": True
+    },
+    {
+      "__type__": "InteractiveElement",
+      "elementId": 456691,
+      "elementTypeId": 300,
+      "enabledSkills": [
+        {
+          "__type__": "InteractiveElementSkill",
+          "skillId": 84,
+          "skillInstanceUid": 146442234
+        }
+      ],
+      "disabledSkills": [],
+      "onCurrentMap": False
+    },
+    {
+      "__type__": "InteractiveElement",
+      "elementId": 456715,
+      "elementTypeId": 300,
+      "enabledSkills": [
+        {
+          "__type__": "InteractiveElementSkill",
+          "skillId": 84,
+          "skillInstanceUid": 146423873
+        }
+      ],
+      "disabledSkills": [],
+      "onCurrentMap": False
+    },
+    {
+      "__type__": "InteractiveElement",
+      "elementId": 456880,
+      "elementTypeId": 300,
+      "enabledSkills": [
+        {
+          "__type__": "InteractiveElementSkill",
+          "skillId": 84,
+          "skillInstanceUid": 146426727
+        }
+      ],
+      "disabledSkills": [],
+      "onCurrentMap": False
+    }
+  ],
+  "statedElements": [],
+  "obstacles": [],
+  "fights": [],
+  "hasAggressiveMonsters": True,
+  "fightStartPositions": {
+    "__type__": "FightStartingPositions",
+    "positionsForChallengers": [
+      286,
+      300,
+      315,
+      329,
+      344,
+      357,
+      358,
+      372,
+      386,
+      401,
+      415,
+      430
+    ],
+    "positionsForDefenders": [
+      271,
+      285,
+      299,
+      314,
+      328,
+      343,
+      373,
+      387,
+      402,
+      416,
+      431,
+      444
+    ]
+  }
+}415

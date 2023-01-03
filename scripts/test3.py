@@ -40,7 +40,7 @@ def idToPix(id, onCroppedScreen, delta_x=0, delta_y=0):
 
 class Window():
     def __init__(self):
-        self.title = "Lorienta - Dofus 2.65.5.16"
+        self.title = "Lorienta - Dofus 2.66.1.11"
         self.GameWindow = win32gui.FindWindow(None, self.title)
         win32gui.MoveWindow(self.GameWindow, -8, 0, 716, 600, True)
 

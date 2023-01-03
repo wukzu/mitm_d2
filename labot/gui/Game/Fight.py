@@ -10,17 +10,21 @@ class Fight:
     def __init__(self, gui, Player, Map):
         print("HELLO from fight")
         self.Gui = gui
+        self.Player = Player
+        self.Map = Map
 
         self.isFighting = False
         self.monsters = []
-
-        self.Player = Player
-        self.Map = Map
 
         self.playerMoved = False
 
         self.spellsCastedMonsters = []
         self.spellsCasted = []
+
+        self.monsterRestrictions = {
+            'maximumNumber': None,
+            'ids': None
+        }
 
         self.FightAlgorithm = FightAlgorithm(self.Map, self.Player, self)
 
@@ -30,11 +34,9 @@ class Fight:
                 return monster['id']
 
     def passTurn(self):
-        print('---->>>> sending PASS TURN')
         self.Gui.qSocket.put(Socket.fightPassTurn())
 
     def useSpell(self, spellId, cellId):
-        print('---->>>> sending useSpell', spellId, cellId)
         monsterId = 0
         for monster in self.monsters:
             if monster['cellId'] == cellId:
@@ -49,7 +51,6 @@ class Fight:
         self.Gui.qSocket.put(Socket.useSpell(spellId, cellId))
 
     def setFightReady(self):
-        print('---->>>> sending PASS TURN')
         self.Gui.qSocket.put(Socket.setFightReady())
 
     def getDistance(self, X1, Y1, X2, Y2):
@@ -106,12 +107,6 @@ class Fight:
             print('Nouveaux monstres :::', self.monsters)
             if len(self.monsters) == 0:
                 self.isFighting = False
-
-
-            # [{'id': -2, 'cellId': 484}]
-            # 458
-            # {'PA': 8, 'PM': 4, 'PDV': 1364}
-        
         
         if action == "fightMonsterSlide":
             for monster in self.monsters:
@@ -123,33 +118,7 @@ class Fight:
             self.spellsCastedMonsters = []
             self.spellsCasted = []
             print('### fight turn start')
-            # print("---")
-            # print(self.monsters)
-            # print(self.Player.cellId)
-            # print(self.Player.characteristics)
-            # print("---")
-            # print()
             self.FightAlgorithm.actionHandle(action)
-
-        # if action == "fightDeplacementFinished":
-        #     print('### fight deplacement finished')
-        #     print("---")
-        #     print(self.monsters)
-        #     print(self.Player.cellId)
-        #     print(self.Player.characteristics)
-        #     print("---")
-        #     print()
-        #     self.FightAlgorithm.actionHandle(action)
-        
-        # if action == "fightCastSpellFinished":
-        #     print('### fight deplacement finished')
-        #     print("---")
-        #     print(self.monsters)
-        #     print(self.Player.cellId)
-        #     print(self.Player.characteristics)
-        #     print("---")
-        #     print()
-        #     self.FightAlgorithm.actionHandle(action)
         
         elif action == "allActionsFinished" and self.isFighting == True:
             print('(((((((((((((((( ALL ACTIONS FINISHED. Monsters :', self.monsters)

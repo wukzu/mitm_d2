@@ -120,6 +120,8 @@ class Map:
                     self.wallCellList.append([x, y])
 
     def routeToMountStable(self):
+        self.Gui.Mount.routeToUpMount()
+        return
         
         self.Gui.qSocket.put(Socket.EnterHavenBag(self.Gui.Player.id))
         
@@ -148,8 +150,12 @@ class Map:
 
         self.Gui.Player.moveToCellId(314)
         self.Gui.waitCallback("stableOpened")
+        print('<<<<<< CALLBACK FINISHED, timer 4 sec')
+        time.sleep(4000/1000)
 
-        print('<<<<<< CALLBACK FINISHED')
+        print('<<<<<< Launch routeToUpMount()')
+
+        #self.Gui.Mount.routeToUpMount()
 
 
         

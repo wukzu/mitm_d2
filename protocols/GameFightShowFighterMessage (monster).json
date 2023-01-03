@@ -1,0 +1,219 @@
+{
+  "__type__": "GameFightShowFighterMessage",
+  "informations": {
+    "__type__": "GameFightMonsterInformations",
+    "contextualId": -1.0,
+    "disposition": {
+      "__type__": "FightEntityDispositionInformations",
+      "cellId": 46,
+      "direction": 1,
+      "carryingCharacterId": 0.0
+    },
+    "look": {
+      "__type__": "EntityLook",
+      "bonesId": 4929,
+      "skins": [],
+      "indexedColors": [],
+      "scales": [
+        70
+      ],
+      "subentities": []
+    },
+    "spawnInfo": {
+      "__type__": "GameContextBasicSpawnInformation",
+      "teamId": 1,
+      "alive": True,
+      "informations": {
+        "__type__": "GameContextActorPositionInformations",
+        "contextualId": -1.0,
+        "disposition": {
+          "__type__": "FightEntityDispositionInformations",
+          "cellId": 46,
+          "direction": 1,
+          "carryingCharacterId": 0.0
+        }
+      }
+    },
+    "wave": 0,
+    "stats": {
+      "__type__": "GameFightCharacteristics",
+      "characteristics": {
+        "__type__": "CharacterCharacteristics",
+        "characteristics": [
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 1,
+            "total": 5
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 23,
+            "total": 3
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 37,
+            "total": 0
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 33,
+            "total": -19
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 35,
+            "total": -9
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 36,
+            "total": 6
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 34,
+            "total": 31
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 101,
+            "total": 0
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 27,
+            "total": 4
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 28,
+            "total": 4
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 79,
+            "total": 6
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 78,
+            "total": 6
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 44,
+            "total": 256
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 0,
+            "total": 90
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 10,
+            "total": 64
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 97,
+            "total": 0
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 15,
+            "total": 64
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 11,
+            "total": 0
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 122,
+            "total": 100
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 90,
+            "total": 0
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 13,
+            "total": 64
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 123,
+            "total": 100
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 89,
+            "total": 0
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 92,
+            "total": 0
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 120,
+            "total": 100
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 125,
+            "total": 100
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 16,
+            "total": 0
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 91,
+            "total": 0
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 95,
+            "total": 0
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 14,
+            "total": 64
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 107,
+            "total": 100
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 25,
+            "total": 0
+          },
+          {
+            "__type__": "CharacterCharacteristicValue",
+            "characteristicId": 88,
+            "total": 0
+          }
+        ]
+      },
+      "summoner": 0.0,
+      "summoned": False,
+      "invisibilityState": 3
+    },
+    "previousPositions": [],
+    "creatureGenericId": 78,
+    "creatureGrade": 1,
+    "creatureLevel": 16
+  }
+}

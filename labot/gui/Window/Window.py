@@ -29,7 +29,7 @@ def idToPix(id, onCroppedScreen, delta_x=0, delta_y=0):
 
 class Window():
     def __init__(self):
-        self.title = "Lorienta - Dofus 2.65.6.25"
+        self.title = "Lorienta - Dofus 2.66.1.11"
         self.GameWindow = win32gui.FindWindow(None, self.title)
         win32gui.MoveWindow(self.GameWindow, -8, 0, 716, 600, True)
 
@@ -37,6 +37,11 @@ class Window():
         print("window :clickCellId ", cellId)
 
         x,y = idToPix(cellId, False)
+        self.click(x, y)
+
+    def clickCellIdWithDeltaX(self, cellId, deltaX):
+        x,y = idToPix(cellId, False)
+        x = x + 24
         self.click(x, y)
 
     def click(self,x,y):

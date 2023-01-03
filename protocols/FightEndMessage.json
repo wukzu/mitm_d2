@@ -1,0 +1,66 @@
+{
+  "__type__": "GameFightEndMessage",
+  "duration": 34658,
+  "rewardRate": 100,
+  "lootShareLimitMalus": -1,
+  "results": [
+    {
+      "__type__": "FightResultPlayerListEntry",
+      "outcome": 2,
+      "wave": 0,
+      "rewards": {
+        "__type__": "FightLoot",
+        "objects": [
+          {
+            "__type__": "FightLootObject",
+            "objectId": 2460,
+            "quantity": 1,
+            "priorityHint": 0
+          },
+          {
+            "__type__": "FightLootObject",
+            "objectId": 383,
+            "quantity": 1,
+            "priorityHint": 0
+          }
+        ],
+        "kamas": 0
+      },
+      "id": 115831800030.0,
+      "alive": True,
+      "level": 184,
+      "additional": [
+        {
+          "__type__": "FightResultExperienceData",
+          "showExperience": True,
+          "showExperienceLevelFloor": True,
+          "showExperienceNextLevelFloor": True,
+          "showExperienceFightDelta": True,
+          "showExperienceForGuild": False,
+          "showExperienceForMount": False,
+          "isIncarnationExperience": False,
+          "experience": 1510722231,
+          "experienceLevelFloor": 1463811000,
+          "experienceNextLevelFloor": 1534506000,
+          "experienceFightDelta": 1485,
+          "experienceForGuild": 0,
+          "experienceForMount": 0,
+          "rerollExperienceMul": 1
+        }
+      ]
+    },
+    {
+      "__type__": "FightResultFighterListEntry",
+      "outcome": 0,
+      "wave": 0,
+      "rewards": {
+        "__type__": "FightLoot",
+        "objects": [],
+        "kamas": 0
+      },
+      "id": -1.0,
+      "alive": True
+    }
+  ],
+  "namedPartyTeamsOutcomes": []
+}

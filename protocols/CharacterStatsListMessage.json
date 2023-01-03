@@ -1,0 +1,625 @@
+{0
+  "__type__": "CharacterStatsListMessage",
+  "stats": {
+    "__type__": "CharacterCharacteristicsInformations",
+    "experience": 1509378747,
+    "experienceLevelFloor": 1463811000,
+    "experienceNextLevelFloor": 1534506000,
+    "experienceBonusLimit": 0,
+    "kamas": 1354363,
+    "alignmentInfos": {
+      "__type__": "ActorExtendedAlignmentInformations",
+      "alignmentSide": 0,
+      "alignmentValue": 0,
+      "alignmentGrade": 0,
+      "characterPower": 115831800214.0,
+      "honor": 0,
+      "honorGradeFloor": 0,
+      "honorNextGradeFloor": 500,
+      "aggressable": 0
+    },
+    "criticalHitWeapon": 28,
+    "characteristics": [
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 0,
+        "base": 970,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterUsableCharacteristicDetailed",
+        "characteristicId": 1,
+        "base": 7,
+        "additional": 0,
+        "objectsAndMountBonus": 4,
+        "alignGiftBonus": 0,
+        "contextModif": 0,
+        "used": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 3,
+        "base": 15,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicValue",
+        "characteristicId": 4,
+        "total": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 10,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 4294967264,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 11,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 1664,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 12,
+        "base": 100,
+        "additional": 0,
+        "objectsAndMountBonus": 248,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 13,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 14,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 123,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 15,
+        "base": 300,
+        "additional": 25,
+        "objectsAndMountBonus": 312,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 16,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 7,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 18,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 3,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 19,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 4,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterUsableCharacteristicDetailed",
+        "characteristicId": 23,
+        "base": 3,
+        "additional": 0,
+        "objectsAndMountBonus": 1,
+        "alignGiftBonus": 0,
+        "contextModif": 0,
+        "used": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 25,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 90,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 26,
+        "base": 1,
+        "additional": 0,
+        "objectsAndMountBonus": 3,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 27,
+        "base": 34,
+        "additional": 0,
+        "objectsAndMountBonus": 6,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 28,
+        "base": 34,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicValue",
+        "characteristicId": 29,
+        "total": 7400
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 31,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 33,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 5,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 34,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 35,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 36,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 37,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 39,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 44,
+        "base": 760,
+        "additional": 0,
+        "objectsAndMountBonus": 549,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicValue",
+        "characteristicId": 47,
+        "total": 10000
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 48,
+        "base": 100,
+        "additional": 0,
+        "objectsAndMountBonus": 13,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 49,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 4,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 50,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 54,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 21,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 55,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 11,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 56,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 22,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 57,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 12,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 58,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 7,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 69,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 70,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 75,
+        "base": 10,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 78,
+        "base": 12,
+        "additional": 0,
+        "objectsAndMountBonus": 11,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 79,
+        "base": 12,
+        "additional": 0,
+        "objectsAndMountBonus": 15,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 82,
+        "base": 10,
+        "additional": 0,
+        "objectsAndMountBonus": 24,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 83,
+        "base": 10,
+        "additional": 0,
+        "objectsAndMountBonus": 30,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 84,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 85,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 86,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 87,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 20,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 88,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 89,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 28,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 90,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 91,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 13,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 92,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 95,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicValue",
+        "characteristicId": 96,
+        "total": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 97,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 101,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 102,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 106,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 107,
+        "base": 100,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 110,
+        "base": 0,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 120,
+        "base": 100,
+        "additional": 0,
+        "objectsAndMountBonus": 7,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 121,
+        "base": 100,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 122,
+        "base": 100,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 123,
+        "base": 100,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 124,
+        "base": 100,
+        "additional": 0,
+        "objectsAndMountBonus": 7,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 125,
+        "base": 100,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 141,
+        "base": 100,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      },
+      {
+        "__type__": "CharacterCharacteristicDetailed",
+        "characteristicId": 142,
+        "base": 100,
+        "additional": 0,
+        "objectsAndMountBonus": 0,
+        "alignGiftBonus": 0,
+        "contextModif": 0
+      }
+    ],
+    "spellModifications": [],
+    "probationTime": 0
+  }
+}

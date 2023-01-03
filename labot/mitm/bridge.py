@@ -16,6 +16,7 @@ import os
 import logging
 import time
 
+from .MountDecoder import MountDecoder
 from ..data import Buffer, Msg, Dumper
 from .. import protocol
 
@@ -86,8 +87,31 @@ def getCharacteristicType(characteristicId):
     else:
         return "NONE"
 
+def handleMounts(Bridge, name, data):
+
+    if name == "ExchangeStartOkMountWithOutPaddockMessage":
+        print("MOUNTS FROM BRIDGE :", data)
+        mountsToLevelUp = MountDecoder.getMountsToLevelUp(data)
+        Bridge.qForm.put(('mountsToLevelUp', dictToString({
+            'mounts': mountsToLevelUp
+        })))
+
+    if name == "MountRidingMessage":
+        print("###### GOT MountRidingMessage")
+        Bridge.qForm.put(('MountRidingMessage', ''))
+
+    if name == "ExchangeMountsStableRemoveMessage":
+        Bridge.qForm.put(('ExchangeMountsStableRemoveMessage', ''))
+
+    if name == "MountXpRatioMessage":
+        Bridge.qForm.put(('MountXpRatioMessage', ''))
+
+
+
 
 def handleMessage(Bridge, name, data):
+
+    handleMounts(Bridge, name, data)
     #print ("---- Handle message Bridge :", str(name), data)
     if Bridge.waiting:
         if name == Bridge.waitingName:
@@ -588,16 +612,7 @@ class InjectorBridgeHandler(BridgeHandler):
         except:
             print("FAILED : on reesssait ")
             self.qSocket.put(("sendMessage", infos))
-
-    def set_fight_ready(self):
-        msg = Msg.from_json(
-            {"__type__": "GameFightReadyMessage", "isReady": True}
-        )
-        try:
-            self.send_to_server(msg)
-        except:
-            print("FAILED : on reesssait ")
-            self.qSocket.put(("fightSetReady", ""))
+            
 
     def handle(self, data, origin):
         self.buf[origin] += data
@@ -619,24 +634,24 @@ class InjectorBridgeHandler(BridgeHandler):
                 % (msgType, parsedMsg, msg.data)
             )
 
-            # if protocol.msg_from_id[msg.id]["name"] not in self.blackList:
-            #     if from_client:
-            #         logger.info(
-            #             ("-- SENT - [%(count)i] %(name)s (%(size)i Bytes)"),
-            #             dict(
-            #                 count=msg.count,
-            #                 name=protocol.msg_from_id[msg.id]["name"],
-            #                 size=len(msg.data),
-            #             ),
-            #         )
-            #     else:
-            #         logger.info(
-            #             ("RECV - %(name)s (%(size)i Bytes)"),
-            #             dict(name=protocol.msg_from_id[msg.id]["name"], size=len(msg.data)),
-            #         )
+            if protocol.msg_from_id[msg.id]["name"] not in self.blackList:
+                if from_client:
+                    logger.info(
+                        ("-- SENT - [%(count)i] %(name)s (%(size)i Bytes)"),
+                        dict(
+                            count=msg.count,
+                            name=protocol.msg_from_id[msg.id]["name"],
+                            size=len(msg.data),
+                        ),
+                    )
+                else:
+                    logger.info(
+                        ("RECV - %(name)s (%(size)i Bytes)"),
+                        dict(name=protocol.msg_from_id[msg.id]["name"], size=len(msg.data)),
+                    )
                 
-            #     print(parsedMsg)
-            #     print()
+                print(parsedMsg)
+                print()
 
             handleMessage(self, protocol.msg_from_id[msg.id]["name"], parsedMsg)
 

@@ -271,13 +271,13 @@ class FightAlgorithm:
             # playerPos, monsterPos, [monsterPos], pmLeft, unwalkable, monsterToHitX, monsterToHitY
             if len(self.Fight.spellsCasted) > 0:
                 cell = Movement.getMovementCellWithoutSpell([playerPosX, playerPosY], [monsterToHitX, monsterToHitY], monstersPos, int(self.Player.characteristics['PM']), self.Map.nonWalkableCells, monsterToHitX, monsterToHitY, 'far')
-                if cell != -1:
+                if cell != -1 and cell[0] != playerPosX and cell[1] != playerPosY:
                     movementCellId = Constants.cells_game[cell[0]][cell[1]]
                     self.Player.moveToCellId(movementCellId)
                     return
             if len(self.Fight.spellsCasted) == 0:
                 cell = Movement.getMovementCellWithoutSpell([playerPosX, playerPosY], [monsterToHitX, monsterToHitY], monstersPos, int(self.Player.characteristics['PM']), self.Map.nonWalkableCells, monsterToHitX, monsterToHitY, 'close')
-                if cell != -1:
+                if cell != -1 and cell[0] != playerPosX and cell[1] != playerPosY:
                     movementCellId = Constants.cells_game[cell[0]][cell[1]]
                     self.Player.moveToCellId(movementCellId)
                     return
