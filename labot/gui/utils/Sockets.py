@@ -87,6 +87,30 @@ class Socket:
                 'xpRatio': 90
             }
         }))
+    
+    def mountMovePaddockToStable(mountsId): 
+        return ("sendMessage", json.dumps({
+            'messageName': 'ExchangeHandleMountsMessage',
+            'data': {
+                'actionType': 7,
+                'ridesId': mountsId
+            }
+        }))
+    
+    def mountMoveStableToPaddock(mountsId): 
+        return ("sendMessage", json.dumps({
+            'messageName': 'ExchangeHandleMountsMessage',
+            'data': {
+                'actionType': 6,
+                'ridesId': mountsId
+            }
+        }))
+    
+    def offLogs():
+        return ("offLogs", "")
+    
+    def onLogs():
+        return ("onLogs", "")
 
     print("----------- end callback")
 

@@ -1,25 +1,81 @@
 
 
+import json
+
+
+def buildMountInfos(mount, place = 's'):
+    return {
+        'id': int(mount['id']),
+        'level': mount['level'],
+        'love': mount['love'],
+        'maturity': mount['maturity'],
+        'maturityForAdult': mount['maturityForAdult'],
+        'stamina': mount['stamina'],
+        'serenity': mount['serenity'],
+        'sex': mount['sex'],
+        'place': place
+    }
 
 class MountDecoder:
 
-    def getMountsToLevelUp(data):
+    def getMounts(data):
         print("todo")
 
-        mountsToLevelUp = []
+        stabledMounts = data['stabledMountsDescription']
+        paddockedMounts = []
+        try:
+            paddockedMounts = data['paddockedMountsDescription']
+        except KeyError:
+            paddockedMounts = []
 
-        allMounts = data['stabledMountsDescription']
+        mounts = []
 
-        for mount in allMounts:
-            level = mount['level']
-            love = mount['love']
-            maturity = mount['maturity']
-            maturityForAdult = mount['maturityForAdult']
-            stamina = mount['stamina']
-
-            if level < 5 and love >= 7500 and maturity == maturityForAdult and stamina >= 7500:
-                mountsToLevelUp.append({
-                    'id': mount['id']
-                })
+        for mount in stabledMounts:
+            mounts.append(buildMountInfos(mount, 's'))
+            
+        for mount in paddockedMounts:
+            mounts.append(buildMountInfos(mount, 'p'))
         
-        return mountsToLevelUp
+        return {
+            'mounts': mounts
+        }
+
+    def getMountBoostChanged(data):
+        mountId = int(data['rideId'])
+
+        boostList = data['boostToUpdateList']
+        finalBoostList = []
+
+        for boost in boostList:
+            finalBoostList.append({
+                'type': boost['type'],
+                'value': boost['value']
+            })
+        
+        return {
+            'mountId': mountId,
+            'boostList': finalBoostList
+        }
+    
+    def getMountsAddedPaddock(data):
+        mountsAdded = []
+
+        for mount in data['mountDescription']:
+            mountsAdded.append(buildMountInfos(mount, 'p'))
+        
+        return {
+            'mountsAdded': mountsAdded
+        }
+    
+
+    def getMountsAddedStable(data):
+        mountsAdded = []
+
+        for mount in data['mountDescription']:
+            mountsAdded.append(buildMountInfos(mount, 's'))
+        
+        return {
+            'mountsAdded': mountsAdded
+        }
+    
+            

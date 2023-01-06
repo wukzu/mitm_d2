@@ -89,19 +89,39 @@ def getCharacteristicType(characteristicId):
 
 def handleMounts(Bridge, name, data):
 
-    if name == "ExchangeStartOkMountWithOutPaddockMessage":
-        print("MOUNTS FROM BRIDGE :", data)
-        mountsToLevelUp = MountDecoder.getMountsToLevelUp(data)
-        Bridge.qForm.put(('mountsToLevelUp', dictToString({
-            'mounts': mountsToLevelUp
+    if name == "ExchangeStartOkMountWithOutPaddockMessage" or name == "ExchangeStartOkMountMessage":
+        mounts = MountDecoder.getMounts(data)
+        Bridge.qForm.put(('allMounts', dictToString(mounts)))
+    
+    if name == "UpdateMountCharacteristicsMessage":
+        mountBoostChanged = MountDecoder.getMountBoostChanged(data)
+        Bridge.qForm.put(('mountBoostUpdated', dictToString(mountBoostChanged)))
+
+
+
+    if name == "ExchangeMountsPaddockAddMessage":
+        mountAddedPaddock = MountDecoder.getMountsAddedPaddock(data)
+        Bridge.qForm.put(('mountsAddedPaddock', dictToString(mountAddedPaddock)))
+
+    if name == "ExchangeMountsPaddockRemoveMessage":
+        Bridge.qForm.put(('mountsRemovePaddock', dictToString({
+            'mountsRemoved': data['mountsId']
         })))
+    
+    if name == "ExchangeMountsStableAddMessage":
+        mountAddedStable = MountDecoder.getMountsAddedStable(data)
+        Bridge.qForm.put(('mountsAddedStable', dictToString(mountAddedStable)))
+
+    if name == "ExchangeMountsStableRemoveMessage":
+        Bridge.qForm.put(('mountsRemoveStable', dictToString({
+            'mountsRemoved': data['mountsId']
+        })))
+
 
     if name == "MountRidingMessage":
         print("###### GOT MountRidingMessage")
         Bridge.qForm.put(('MountRidingMessage', ''))
 
-    if name == "ExchangeMountsStableRemoveMessage":
-        Bridge.qForm.put(('ExchangeMountsStableRemoveMessage', ''))
 
     if name == "MountXpRatioMessage":
         Bridge.qForm.put(('MountXpRatioMessage', ''))
@@ -556,6 +576,8 @@ class InjectorBridgeHandler(BridgeHandler):
         self.packetThread = threading.Thread(target=self.queueHandle, args=())
         self.packetThread.start()
 
+        self.printLogs = False
+
     def resetFightObj(self):
         self.fight = {
             "playerCellId": 0,
@@ -574,6 +596,10 @@ class InjectorBridgeHandler(BridgeHandler):
                 print("------- MESSAGE : " + str(action)  + " - data: " + str(infos))
                 if action == "sendMessage":
                     self.send_socket(infos)
+                if action == "offLogs":
+                    self.printLogs = False
+                if action == "onLogs":
+                    self.printLogs = True
 
 
     def send_to_client(self, data):
@@ -634,7 +660,7 @@ class InjectorBridgeHandler(BridgeHandler):
                 % (msgType, parsedMsg, msg.data)
             )
 
-            if protocol.msg_from_id[msg.id]["name"] not in self.blackList:
+            if self.printLogs == True and protocol.msg_from_id[msg.id]["name"] not in self.blackList:
                 if from_client:
                     logger.info(
                         ("-- SENT - [%(count)i] %(name)s (%(size)i Bytes)"),

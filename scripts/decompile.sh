@@ -13,3 +13,4 @@ cd "$( dirname "${BASH_SOURCE[0]}" )"
         ./sources $DofusInvoker
 
 sh ffdec.sh -config parallelSpeedUp=0 -selectclass com.ankamagames.dofus.BuildInfos,com.ankamagames.dofus.network.++,com.ankamagames.jerakine.network.++ -export script ../sources C:/Users/llegay/Documents/DofusInvoker.swf
+sh ffdec.sh -config parallelSpeedUp=0 -selectclass com.ankamagames.dofus.BuildInfos,com.ankamagames.dofus.network.++,com.ankamagames.jerakine.network.++ -export script ../sources C:/Users/33630/Desktop/DofusInvoker.swf

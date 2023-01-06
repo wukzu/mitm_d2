@@ -85,8 +85,10 @@ class GUI(threading.Thread):
         self.root.minsize(136, 1)
         self.root.maxsize(3844, 1153)
 
-        self.logsCheckbox = tk.Checkbutton(self.root, text='Go to mount stable',variable=self.vLogs, onvalue=1, offvalue=0, command=self.Map.routeToMountStable)
-        self.logsCheckbox.pack()
+        #self.logsCheckbox = tk.Checkbutton(self.root, text='Go to mount stable',variable=self.vLogs, onvalue=1, offvalue=0, command=self.Map.routeToMountStable)
+        #self.logsCheckbox.pack()
+        self.btnMounts =  tk.Button(self.root, text ="Dragrodindes", command = self.openDDWindow)
+        self.btnMounts.pack()
 
         self.lStatus = tk.Label(self.root, textvariable=self.var)
         self.lStatus.place(relx=0.657, rely=0.015, height=36, width=98)
@@ -207,6 +209,36 @@ class GUI(threading.Thread):
     def quitProgram(self):
         self.fnQuit()
 
+    def openDDWindow(self):
+        self.DDWindow = tk.Toplevel(self.root)
+        self.DDWindow.title("New Window")
+
+        self.DDWindow.geometry("500x300")
+        tk.Label(self.DDWindow, text ="Dragodinde manager").pack()
+        self.btnMountlapping =  tk.Button(self.DDWindow, text ="Start baffeurs", command = self.Mount.toggleSlapping)
+        self.btnMountlapping.pack()
+        
+        self.btnMountCaressing =  tk.Button(self.DDWindow, text ="Start caresseurs", command = self.Mount.toggleCaressing)
+        self.btnMountCaressing.pack()
+
+        self.btnMountStamina =  tk.Button(self.DDWindow, text ="Start foudroyeurs", command = self.Mount.toggleStamina)
+        self.btnMountStamina.pack()
+        
+        self.btnMountLove =  tk.Button(self.DDWindow, text ="Start dragofesses", command = self.Mount.toggleLove)
+        self.btnMountLove.pack()
+
+        self.lDDInfos = tk.Label(self.DDWindow, text = "-")
+        self.lDDInfos.pack()
+
+        self.sql_commands = tk.Text(self.DDWindow)
+        self.sql_commands.insert(tk.INSERT, "#self.qSocket.put(('',''))")
+        self.sql_commands.pack()
+        self.submit_button = tk.Button(self.DDWindow, text=' Submit ', command=self.submit_click)
+        self.submit_button.pack()
+    
+    def submit_click(self):
+        exec(self.sql_commands.get("1.0", 'end'))
+
     def changeParsedLogs(self):
         if self.vParsedLogs.get() == 1:
             self.qSocket.put(('activateParsedLogs', ''))
@@ -236,7 +268,7 @@ class GUI(threading.Thread):
             action, data = self.qForm.get()
             #print("[GUI] check_queue RECV action : " + str(action) + ' - data :' + str(data))
 
-            print("GUI  qForm :: received ", action)
+            #print("GUI  qForm :: received ", action)
             infos = {}
             if data != "":
                 infos = json.loads(data)
@@ -246,7 +278,7 @@ class GUI(threading.Thread):
                 self.Window = Window()
                 self.var.set("Initialized")
             if action == self.callbackToWait:
-                print("GUI  RECEIVED CALLBACK ", action)
+                #print("GUI  RECEIVED CALLBACK ", action)
                 self.callbackToWait= ""
                 self.waitingVar.set(False)
             # if action == 'callback':

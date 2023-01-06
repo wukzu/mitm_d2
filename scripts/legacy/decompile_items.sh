@@ -6,14 +6,18 @@ if ! command -v py &>/dev/null; then
 fi
 
 
-export i18n="C:/Users/llegay/AppData/Local/Ankama/Dofus/data/i18n/"
-export common="C:/Users/llegay/AppData/Local/Ankama/Dofus/data/common/"
-export elements="C:/Users/llegay/AppData/Local/Ankama/Dofus/content/maps/elements.ele"
-export maps="C:/Users/llegay/AppData/Local/Ankama/Dofus/content/maps/"
+export i18n="C:/Users/33630/AppData/Local/Ankama/Dofus/data/i18n/"
+export common="C:/Users/33630/AppData/Local/Ankama/Dofus/data/common/"
+export elements="C:/Users/33630/AppData/Local/Ankama/Dofus/content/maps/elements.ele"
+export maps="C:/Users/33630/AppData/Local/Ankama/Dofus/content/maps/"
 
-export pydofusPath="C:/Users/llegay/Desktop/pydofus/PyDofus"
-export sourcesPath="C:/Users/llegay/Desktop/MITM/mitm_d2/sources"
+export pydofusPath="C:/Users/33630/Desktop/PyDofus/PyDofus"
+export sourcesPath="C:/Users/33630/Desktop/mitm/mitm_d2/sources"
 
+
+##############################################
+##############################################
+##############################################
 
 # rm "$pydofusPath/output/"*"/"*"/"*".dlm"
 # cp "$pydofusPath/output/"* "$sourcesPath/data/maps"
@@ -30,6 +34,11 @@ export sourcesPath="C:/Users/llegay/Desktop/MITM/mitm_d2/sources"
 # if [ ! -d "./output" ]; then
 #     mkdir -p "./output";
 # fi
+
+##############################################
+##############################################
+##############################################
+
 cd 
 rm -rf "$pydofusPath/input/"*
 rm -rf "$pydofusPath/output/"*
@@ -40,40 +49,40 @@ rm -rf "$sourcesPath/data/elements/"*
 
 # First do the i18n file
 
- echo "Decompiling internationalisation files..."
-cp "$i18n"*.d2i "$pydofusPath/input"
-for file in  "$pydofusPath/input/"*".d2i"; do
-     py "$pydofusPath/d2i_unpack.py" "$file"
-done
+#  echo "Decompiling internationalisation files..."
+# cp "$i18n"*.d2i "$pydofusPath/input"
+# for file in  "$pydofusPath/input/"*".d2i"; do
+#      py "$pydofusPath/d2i_unpack.py" "$file"
+# done
 
-cp "$pydofusPath/input/"*".json" "$sourcesPath/data/i18n"
+# cp "$pydofusPath/input/"*".json" "$sourcesPath/data/i18n"
 
-# Then all the d2o files
+# # Then all the d2o files
 
-echo "Decompiling object files..."
+# echo "Decompiling object files..."
 
-cp "$common"*.d2o "$pydofusPath/input"
-py "$pydofusPath/d2o_unpack.py"
-mv "$pydofusPath/output/"* "$sourcesPath/data/common"
-rm -rf "$pydofusPath/input/"*
+# cp "$common"*.d2o "$pydofusPath/input"
+# py "$pydofusPath/d2o_unpack.py"
+# mv "$pydofusPath/output/"* "$sourcesPath/data/common"
+# rm -rf "$pydofusPath/input/"*
 
 # Finally the map files:
 
 
 echo "Decompiling map files..."
 
-echo "Map files are huge and take a long time to decompile (~40minutes). Do you want to decompile them now? (y/n)"
+# echo "Map files are huge and take a long time to decompile (~40minutes). Do you want to decompile them now? (y/n)"
 
-read -r answer
+# read -r answer
 
-while [[ $answer != "y" && $answer != "n" ]] ; do
-  echo "Please answer (y)es or (n)o"
-  read -r answer
-done;
+# while [[ $answer != "y" && $answer != "n" ]] ; do
+#   echo "Please answer (y)es or (n)o"
+#   read -r answer
+# done;
 
-if [[ $answer == "n" ]]; then
-  exit 0;
-fi;
+# if [[ $answer == "n" ]]; then
+#   exit 0;
+# fi;
 
 py "$pydofusPath/ele_unpack.py" "$elements"
 cp "${elements/.ele/.json}" "$sourcesPath/data/elements"
