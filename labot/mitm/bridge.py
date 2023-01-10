@@ -576,7 +576,7 @@ class InjectorBridgeHandler(BridgeHandler):
         self.packetThread = threading.Thread(target=self.queueHandle, args=())
         self.packetThread.start()
 
-        self.printLogs = False
+        self.printLogs = True
 
     def resetFightObj(self):
         self.fight = {

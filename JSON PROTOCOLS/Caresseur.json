@@ -1,0 +1,56 @@
+{
+    "__type__": "GameDataPaddockObjectListAddMessage",
+    "paddockItemDescription": [
+        {
+            "__type__": "PaddockItem",
+            "cellId": 356,
+            "objectGID": 14761,
+            "durability": {
+                "__type__": "ItemDurability",
+                "durability": 492,
+                "durabilityMax": 1200
+            }
+        },
+        {
+            "__type__": "PaddockItem",
+            "cellId": 357,
+            "objectGID": 14761,
+            "durability": {
+                "__type__": "ItemDurability",
+                "durability": 485,
+                "durabilityMax": 1200
+            }
+        },
+        {
+            "__type__": "PaddockItem",
+            "cellId": 342,
+            "objectGID": 14761,
+            "durability": {
+                "__type__": "ItemDurability",
+                "durability": 518,
+                "durabilityMax": 1200
+            }
+        },
+        {
+            "__type__": "PaddockItem",
+            "cellId": 329,
+            "objectGID": 14761,
+            "durability": {
+                "__type__": "ItemDurability",
+                "durability": 485,
+                "durabilityMax": 1200
+            }
+        },
+        {
+            "__type__": "PaddockItem",
+            "cellId": 315,
+            "objectGID": 14761,
+            "durability": {
+                "__type__": "ItemDurability",
+                "durability": 519,
+                "durabilityMax": 1200
+            }
+        }
+    ]
+}
+

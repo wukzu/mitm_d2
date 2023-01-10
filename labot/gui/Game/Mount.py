@@ -11,6 +11,7 @@ class Mount:
         self.isCaressing = False
         self.isStamina = False
         self.isLove = False
+        self.isMaturity = False
 
 
         self.mounts = []
@@ -57,13 +58,25 @@ class Mount:
         
         print("<><> slapping :", self.isSlapping)
     
+    def toggleMaturity(self):
+        
+        if self.isMaturity == True:
+            self.isMaturity = False
+            self.Gui.btnMountMaturity['text'] = 'Start maturité'
+        else:
+            self.isMaturity = True
+            self.Gui.btnMountMaturity['text'] = 'Stop maturité'
+            self.getMountsToMaturity()
+        
+
+    
     def getMountsToLevelUp(self, mounts):
         for mount in mounts:
             if mount['place'] == 's' and mount['level'] < 5 and mount['love'] >= 7500 and mount['maturity'] == mount['maturityForAdult'] and mount['stamina'] >= 7500:
                 self.mountsToLevelUp.append(mount['id'])
 
     def getMountsToSlap(self):
-        timeToWait = random.randint(500, 3000)
+        timeToWait = random.randint(50, 600)
         self.Gui.waitTime(timeToWait)
         for mount in self.stabledMounts:
             if (self.paddockedMounts) == 10:
@@ -78,11 +91,12 @@ class Mount:
                 print("->>> mount to slap :", mount)
                 self.Gui.qSocket.put(Socket.mountMoveStableToPaddock([mount['id']]))
 
-                timeToWait = random.randint(1000, 5000)
+                timeToWait = random.randint(300, 2000)
                 self.Gui.waitTime(timeToWait)
+                break
 
     def getMountsToCaress(self):
-        timeToWait = random.randint(500, 3000)
+        timeToWait = random.randint(50, 600)
         self.Gui.waitTime(timeToWait)
         print("getMountsToCaress -------------------------- >>>>>>>>>> length paddock :", len(self.paddockedMounts))
         for mount in self.stabledMounts:
@@ -98,13 +112,14 @@ class Mount:
                 print("->>> mount to caress :", mount)
                 self.Gui.qSocket.put(Socket.mountMoveStableToPaddock([mount['id']]))
                 
-                timeToWait = random.randint(1000, 5000)
+                timeToWait = random.randint(300, 2000)
                 self.Gui.waitTime(timeToWait)
+                break
         
         print("<----> ended mounts to paddock")
 
     def getMountsToStamina(self):
-        timeToWait = random.randint(500, 3000)
+        timeToWait = random.randint(50, 600)
         self.Gui.waitTime(timeToWait)
         print("getMountsToCaress -------------------------- >>>>>>>>>> length paddock :", len(self.paddockedMounts))
 
@@ -118,13 +133,14 @@ class Mount:
                 print("->>> mount to stamina :", mount)
                 self.Gui.qSocket.put(Socket.mountMoveStableToPaddock([mount['id']]))
                 
-                timeToWait = random.randint(1000, 5000)
+                timeToWait = random.randint(300, 2000)
                 self.Gui.waitTime(timeToWait)
+                break
         
         print("<----> ended mounts to paddock")
 
     def getMountsToLove(self):
-        timeToWait = random.randint(500, 3000)
+        timeToWait = random.randint(50, 600)
         self.Gui.waitTime(timeToWait)
 
         for mount in self.stabledMounts:
@@ -138,10 +154,32 @@ class Mount:
                 print("->>> mount to love :", mount)
                 self.Gui.qSocket.put(Socket.mountMoveStableToPaddock([mount['id']]))
                 
-                timeToWait = random.randint(1000, 5000)
+                timeToWait = random.randint(300, 2000)
                 self.Gui.waitTime(timeToWait)
+                break
         
         print("<----> ended mounts to paddock")
+    
+    
+    def getMountsToMaturity(self):
+        timeToWait = random.randint(50, 600)
+        self.Gui.waitTime(timeToWait)
+        for mount in self.stabledMounts:
+            print("getMountsToCaress -------------------------- >>>>>>>>>> length paddock :", len(self.paddockedMounts))
+            if len(self.paddockedMounts) >= 10:
+                break
+        
+            if (mount['love'] > 7500 and mount['stamina'] > 7500 and mount['maturity'] < mount['maturityForAdult'] and
+                (((mount['sex'] == False and mount['serenity'] > -999 and mount['serenity'] < 1999) or
+                ((mount['sex'] == True and mount['serenity'] > -1999 and mount['serenity'] < 999))))):
+
+                print("->>> mount to maturity :", mount)
+                self.Gui.qSocket.put(Socket.mountMoveStableToPaddock([mount['id']]))
+                
+                timeToWait = random.randint(300, 2000)
+                self.Gui.waitTime(timeToWait)
+                break
+
 
     def getMountsInfo(self):
         print("---------------- MOUNT INFOS") 
@@ -149,6 +187,7 @@ class Mount:
         needSlapping = 0
         needLove = 0
         needStamina = 0
+        needMaturity = 0
 
         for mount in self.stabledMounts:
             if ((mount['stamina'] < 7500 and
@@ -178,11 +217,19 @@ class Mount:
                 ((mount['sex'] == False and mount['serenity'] > 1000) or (mount['sex'] == True and mount['serenity'] > 0))):
                 needLove = needLove + 1
                 print("need to LOVE :", mount)
+            
+            if (mount['love'] > 7500 and mount['stamina'] > 7500 and mount['maturity'] < mount['maturityForAdult'] and
+                (((mount['sex'] == False and mount['serenity'] > -999 and mount['serenity'] < 1999) or
+                ((mount['sex'] == True and mount['serenity'] > -1999 and mount['serenity'] < 999))))):
+                needMaturity = needMaturity + 1
         
-        final = "Love : " + str(needLove) + ' - Stamina : ' + str(needStamina) + " - Slapping : " + str(needSlapping) + " - Caressing : " + str(needCaressing)
+        final = "Love : " + str(needLove) + ' - Stamina : ' + str(needStamina) + " - Slapping : " + str(needSlapping) + " - Caressing : " + str(needCaressing) + " - Maturity : " + str(needMaturity)
         
         print("---------------- final :", final) 
-        self.Gui.lDDInfos.config(text = final)
+        try:
+            self.Gui.lDDInfos.config(text = final)
+        except:
+            pass
 
 
 
@@ -196,51 +243,50 @@ class Mount:
             self.stabledMounts = [x for x in data['mounts'] if x['place'] == 's']
             self.paddockedMounts = [x for x in data['mounts'] if x['place'] == 'p']
 
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-            print("--------------------")
-
             self.getMountsInfo()
 
         if action == "mountsAddedPaddock":
             for newMount in data['mountsAdded']:
                 self.paddockedMounts.append(newMount)
-            
-        if action == "mountsRemovePaddock":
-            for removedMount in data['mountsRemoved']:
-                self.paddockedMounts = [
-                    item for item in self.paddockedMounts if item.get('id') != removedMount
+                mountId = newMount['id']
+
+                self.stabledMounts = [
+                    item for item in self.stabledMounts if item.get('id') != mountId
                 ]
+            
+            if self.isSlapping:
+                self.getMountsToSlap()
+            elif self.isCaressing:
+                self.getMountsToCaress()
+            elif self.isLove:
+                self.getMountsToLove()
+            elif self.isStamina:
+                self.getMountsToStamina()
+            elif self.isMaturity:
+                self.getMountsToMaturity()
+            
         
         if action == "mountsAddedStable":
             for newMount in data['mountsAdded']:
                 self.stabledMounts.append(newMount)
 
-        if action == "mountsRemoveStable":
-            for removedMount in data['mountsRemoved']:
-                self.stabledMounts = [
-                    item for item in self.stabledMounts if item.get('id') != removedMount
+                mountId = newMount['id']
+                self.paddockedMounts = [
+                    item for item in self.paddockedMounts if item.get('id') != mountId
                 ]
+
+            if self.isSlapping:
+                self.getMountsToSlap()
+            elif self.isCaressing:
+                self.getMountsToCaress()
+            elif self.isLove:
+                self.getMountsToLove()
+            elif self.isStamina:
+                self.getMountsToStamina()
+            elif self.isMaturity:
+                self.getMountsToMaturity()
+
+
         
         print("--- mounts stabble :", len(self.stabledMounts), " | mounts paddocked : ", len(self.paddockedMounts))
 
@@ -259,6 +305,8 @@ class Mount:
                             mount['stamina'] = boost['value']
                         elif boost['type'] == 4:
                             mount['love'] = boost['value']
+                        elif boost['type'] == 5:
+                            mount['maturity'] = boost['value']
 
                     self.mountPaddockActionHandler(mount)
 
@@ -271,7 +319,6 @@ class Mount:
                 ((mount['sex'] == True and mount['serenity'] > -1999 and mount['serenity'] < 999)))))):
                 print('>> moving to stable')
                 self.Gui.qSocket.put(Socket.mountMovePaddockToStable([mount['id']]))
-                self.getMountsToCaress()
 
         elif self.isCaressing:
             if (((mount['love'] < 7500) and ((mount['serenity'] > 1000 and mount['sex'] == False) or (mount['serenity'] > 0 and mount['sex'] == True))) or 
@@ -280,19 +327,23 @@ class Mount:
                 ((mount['sex'] == True and mount['serenity'] > -1999 and mount['serenity'] < 999)))))):
                 print('>> moving to stable')
                 self.Gui.qSocket.put(Socket.mountMovePaddockToStable([mount['id']]))
-                self.getMountsToCaress()
         
         elif self.isStamina:
             if (mount['stamina'] > 7500):
                 print('>> moving to stable')
                 self.Gui.qSocket.put(Socket.mountMovePaddockToStable([mount['id']]))
-                self.getMountsToStamina()
         
         elif self.isLove:
             if (mount['love'] > 7500):
                 print('>> moving to stable')
                 self.Gui.qSocket.put(Socket.mountMovePaddockToStable([mount['id']]))
-                self.getMountsToLove()
+            
+        elif self.isMaturity:
+            if (mount['maturity'] >= mount['maturityForAdult']):
+                print('>> moving to stable')
+                self.Gui.qSocket.put(Socket.mountMovePaddockToStable([mount['id']]))
+
+        
         
                 
 

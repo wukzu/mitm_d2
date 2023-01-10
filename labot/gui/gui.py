@@ -226,6 +226,9 @@ class GUI(threading.Thread):
         
         self.btnMountLove =  tk.Button(self.DDWindow, text ="Start dragofesses", command = self.Mount.toggleLove)
         self.btnMountLove.pack()
+        
+        self.btnMountMaturity =  tk.Button(self.DDWindow, text ="Start maturié", command = self.Mount.toggleMaturity)
+        self.btnMountMaturity.pack()
 
         self.lDDInfos = tk.Label(self.DDWindow, text = "-")
         self.lDDInfos.pack()
