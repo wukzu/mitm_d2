@@ -81,12 +81,12 @@ class Mount:
         for mount in self.stabledMounts:
             if (self.paddockedMounts) == 10:
                 break
-            if ((mount['stamina'] < 7500 and
+            if (mount['boostLimiter'] < mount['boostMax'] and ((mount['stamina'] < 7500 and
                 ((mount['love'] > 7500 and ((mount['sex'] == True and mount['serenity'] >= -1000) or (mount['sex'] == False and mount['serenity'] >= 0))) or
                 ((mount['love'] < 7500 and (mount['sex'] == True and mount['serenity'] < -500 and mount['serenity'] > -1000))) or 
                 ((mount['love'] < 7500 and (mount['sex'] == False and mount['serenity'] > 0 and mount['serenity'] < 500))))) or 
                 (mount['stamina'] > 7500 and mount['love'] > 7500 and mount['maturity'] < mount['maturityForAdult'] and 
-                ((mount['sex'] == False and mount['serenity'] >= 1999) or (mount['sex'] == True and mount['serenity'] >= 999)))):
+                ((mount['sex'] == False and mount['serenity'] >= 1999) or (mount['sex'] == True and mount['serenity'] >= 999))))):
                 
                 print("->>> mount to slap :", mount)
                 self.Gui.qSocket.put(Socket.mountMoveStableToPaddock([mount['id']]))
@@ -102,12 +102,12 @@ class Mount:
         for mount in self.stabledMounts:
             if len(self.paddockedMounts) == 10:
                 break
-            if ((mount['love'] < 7500 and
+            if (mount['boostLimiter'] < mount['boostMax'] and ((mount['love'] < 7500 and
                 ((mount['stamina'] > 7500 and ((mount['sex'] == True and mount['serenity'] < 0) or (mount['sex'] == False and mount['serenity'] < 1000))) or
                 ((mount['stamina'] < 7500 and (mount['sex'] == False and mount['serenity'] > 500 and mount['serenity'] < 1000))) or 
                 ((mount['stamina'] < 7500 and (mount['sex'] == True and mount['serenity'] > -500 and mount['serenity'] < 0))))) or
                 (mount['stamina'] > 7500 and mount['love'] > 7500 and mount['maturity'] < mount['maturityForAdult'] and 
-                ((mount['sex'] == False and mount['serenity'] <= -999) or (mount['sex'] == True and mount['serenity'] <= -1999)))):
+                ((mount['sex'] == False and mount['serenity'] <= -999) or (mount['sex'] == True and mount['serenity'] <= -1999))))):
                 
                 print("->>> mount to caress :", mount)
                 self.Gui.qSocket.put(Socket.mountMoveStableToPaddock([mount['id']]))
@@ -127,8 +127,8 @@ class Mount:
             if len(self.paddockedMounts) == 10:
                 break
         
-            if (mount['stamina'] < 7500 and
-                ((mount['sex'] == False and mount['serenity'] < 0) or (mount['sex'] == True and mount['serenity'] < -1000))):
+            if (mount['boostLimiter'] < mount['boostMax'] and (mount['stamina'] < 7500 and
+                ((mount['sex'] == False and mount['serenity'] < 0) or (mount['sex'] == True and mount['serenity'] < -1000)))):
 
                 print("->>> mount to stamina :", mount)
                 self.Gui.qSocket.put(Socket.mountMoveStableToPaddock([mount['id']]))
@@ -148,8 +148,8 @@ class Mount:
             if len(self.paddockedMounts) >= 10:
                 break
         
-            if (mount['love'] < 7500 and
-                ((mount['sex'] == False and mount['serenity'] > 1000) or (mount['sex'] == True and mount['serenity'] > 0))):
+            if (mount['boostLimiter'] < mount['boostMax'] and (mount['love'] < 7500 and
+                ((mount['sex'] == False and mount['serenity'] > 1000) or (mount['sex'] == True and mount['serenity'] > 0)))):
 
                 print("->>> mount to love :", mount)
                 self.Gui.qSocket.put(Socket.mountMoveStableToPaddock([mount['id']]))
@@ -169,9 +169,9 @@ class Mount:
             if len(self.paddockedMounts) >= 10:
                 break
         
-            if (mount['love'] > 7500 and mount['stamina'] > 7500 and mount['maturity'] < mount['maturityForAdult'] and
+            if (mount['boostLimiter'] < mount['boostMax'] and (mount['love'] > 7500 and mount['stamina'] > 7500 and mount['maturity'] < mount['maturityForAdult'] and
                 (((mount['sex'] == False and mount['serenity'] > -999 and mount['serenity'] < 1999) or
-                ((mount['sex'] == True and mount['serenity'] > -1999 and mount['serenity'] < 999))))):
+                ((mount['sex'] == True and mount['serenity'] > -1999 and mount['serenity'] < 999)))))):
 
                 print("->>> mount to maturity :", mount)
                 self.Gui.qSocket.put(Socket.mountMoveStableToPaddock([mount['id']]))
@@ -299,6 +299,8 @@ class Mount:
                 if mount['id'] == data['mountId']:
 
                     for boost in data['boostList']:
+                        if boost['type'] == 6:
+                            mount['boostLimiter'] = boost['value']
                         if boost['type'] == 2:
                             mount['serenity'] = boost['value']
                         elif boost['type'] == 3:
@@ -312,7 +314,10 @@ class Mount:
 
     def mountPaddockActionHandler(self, mount):
         print("   -> mountPaddockActionHandler :", mount)
-        if self.isSlapping:
+        if mount['boostLimiter'] >= mount['boostMax']:
+            self.Gui.qSocket.put(Socket.mountMovePaddockToStable([mount['id']]))
+
+        elif self.isSlapping:
             if (((mount['stamina'] < 7500) and ((mount['serenity'] < 0 and mount['sex'] == False) or (mount['serenity'] <= -1000 and mount['sex'] == True))) or 
                 ((mount['stamina'] > 7500 and mount['love'] > 7500 and mount['maturity'] < mount['maturityForAdult'] and 
                 ((mount['sex'] == False and mount['serenity'] > -999 and mount['serenity'] < 1999) or

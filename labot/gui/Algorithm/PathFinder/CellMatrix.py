@@ -1,0 +1,2 @@
+class CellMatrix(dict):
+    pass

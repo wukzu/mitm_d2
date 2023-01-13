@@ -1,0 +1,2 @@
+class CellList(list):
+    pass

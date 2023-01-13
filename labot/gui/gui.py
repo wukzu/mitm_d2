@@ -38,6 +38,8 @@ class GUI(threading.Thread):
         
     def run(self):
         self.root = tk.Tk()
+
+        self.gameVersion = ""
         
         self.Map = Map(self)
         self.Player = Player(self)
@@ -276,9 +278,13 @@ class GUI(threading.Thread):
             if data != "":
                 infos = json.loads(data)
 
+            
+            if action == "gameVersion":
+                print("qForm game version :", infos['version'])
+                self.gameVersion = infos['version']
             if action == "Initialized":
                 print("--- Initialize the windows")
-                self.Window = Window()
+                self.Window = Window(self.gameVersion)
                 self.var.set("Initialized")
             if action == self.callbackToWait:
                 #print("GUI  RECEIVED CALLBACK ", action)

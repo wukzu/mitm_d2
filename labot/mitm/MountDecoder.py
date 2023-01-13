@@ -13,6 +13,10 @@ def buildMountInfos(mount, place = 's'):
         'stamina': mount['stamina'],
         'serenity': mount['serenity'],
         'sex': mount['sex'],
+        'boostLimiter': int(mount['boostLimiter']),
+        'boostMax': int(mount['boostMax']),
+        'energy': int(mount['energy']),
+        'energyMax': int(mount['energyMax']),
         'place': place
     }
 

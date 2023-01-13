@@ -140,6 +140,12 @@ def handleMessage(Bridge, name, data):
             Bridge.waitingName = ""
 
     else:
+        if name == 'IdentificationMessage':
+            print("bridge handle : version", data)
+            version = data['version']
+            Bridge.qForm.put(("gameVersion", dictToString({
+                'version': str(version['major']) + '.' + str(version['minor']) + '.' + str(version['code']) + '.' + str(version['build'])
+            })))
         if name == 'MapComplementaryInformationsDataInHavenBagMessage':
             zaapElementId = 0
             zaapSkillInstanceUid = 0

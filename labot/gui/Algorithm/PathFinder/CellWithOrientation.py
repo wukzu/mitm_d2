@@ -3,32 +3,32 @@ class CellWithOrientation:
         self.id = id
         self.x = x
         self.y = y
-        self.orientation = 0
-        self.compressed_value = 0
+        self.Orientation = 0
+        self.CompressedValue = 0
     
-    def set_orientation(self, next_cell: "CellWithOrientation"):
+    def SetOrientation(self, next_cell: "CellWithOrientation"):
         if next_cell.x == self.x:
             if next_cell.y == self.y + 1:
-                self.orientation = 7
+                self.Orientation = 7
             elif next_cell.y == self.y - 1:
-                self.orientation = 3
+                self.Orientation = 3
         elif next_cell.y == self.y:
             if next_cell.x == self.x + 1:
-                self.orientation = 1
+                self.Orientation = 1
             elif next_cell.x == self.x - 1:
-                self.orientation = 5
+                self.Orientation = 5
         else:
             if next_cell.x == self.x + 1 and next_cell.y == self.y + 1:
-                self.orientation = 0
+                self.Orientation = 0
             elif next_cell.x == self.x + 1 and next_cell.y == self.y - 1:
-                self.orientation = 2
+                self.Orientation = 2
             elif next_cell.x == self.x - 1 and next_cell.y == self.y - 1:
-                self.orientation = 4
+                self.Orientation = 4
             elif next_cell.x == self.x - 1 and next_cell.y == self.y + 1:
-                self.orientation = 6
+                self.Orientation = 6
     
-    def set_orientation(self, orientation: int):
-        self.orientation = orientation
+    def SetOrientationInt(self, orientation: int):
+        self.Orientation = orientation
     
-    def get_compressed_value(self):
-        self.compressed_value = (self.orientation & 7) << 12 | self.id & 4095
+    def GetCompressedValue(self):
+        self.CompressedValue = (self.Orientation & 7) << 12 | self.id & 4095
