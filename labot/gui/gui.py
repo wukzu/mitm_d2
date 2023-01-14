@@ -42,7 +42,7 @@ class GUI(threading.Thread):
         self.gameVersion = ""
         
         self.Map = Map(self)
-        self.Player = Player(self)
+        self.Player = Player(self, self.Map)
         self.Fight = Fight(self, self.Player, self.Map)
         self.Mount = Mount(self)
 

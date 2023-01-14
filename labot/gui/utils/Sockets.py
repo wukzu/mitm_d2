@@ -105,6 +105,24 @@ class Socket:
                 'ridesId': mountsId
             }
         }))
+
+    def moveToCellId(path, mapId):
+        return ("sendMessage", json.dumps({
+            'messageName': 'GameMapMovementRequestMessage',
+            'data': {
+                'keyMovements': path,
+                'mapId': mapId
+            }
+        }))
+    
+    def attackMonster(monsterId):
+        return ("sendMessage", json.dumps({
+            'messageName': 'GameRolePlayAttackMonsterRequestMessage',
+            'data': {
+                'monsterGroupId': monsterId
+            }
+        }))
+        
     
     def offLogs():
         return ("offLogs", "")

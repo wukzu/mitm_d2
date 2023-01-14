@@ -140,6 +140,9 @@ def handleMessage(Bridge, name, data):
             Bridge.waitingName = ""
 
     else:
+        if name == 'GameMapMovementConfirmMessage':
+            Bridge.qForm.put(("clientMovementConfirm", ""))
+            
         if name == 'IdentificationMessage':
             print("bridge handle : version", data)
             version = data['version']
@@ -582,7 +585,7 @@ class InjectorBridgeHandler(BridgeHandler):
         self.packetThread = threading.Thread(target=self.queueHandle, args=())
         self.packetThread.start()
 
-        self.printLogs = True
+        self.printLogs = False
 
     def resetFightObj(self):
         self.fight = {

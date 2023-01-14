@@ -13,6 +13,8 @@ class Fight:
         self.Player = Player
         self.Map = Map
 
+        self.fightRoutine = False
+
         self.isFighting = False
         self.monsters = []
 

@@ -2,8 +2,11 @@ import json
 import time
 import math
 import cmath
-from Cell import Cell
-from CellWithOrientation import CellWithOrientation
+# from .Cell import Cell
+# from .CellWithOrientation import CellWithOrientation
+
+from .Cell import Cell
+from .CellWithOrientation import CellWithOrientation
 
 class PathingUtils:
     MapHeight = 20
@@ -311,7 +314,8 @@ class Pathfinder:
             result = result + (11 + abs(speed))
         return result
     
-    
+
+
 
 
 
@@ -335,10 +339,19 @@ def openJsonMap(mapId):
         i = 0
 
   
-result = openJsonMap(212862981)
-print('cell :', result['cells'][203])
 
-a = Pathfinder()
-a.SetMap(result, True)
-#path = a.GetCompressedPath(125, 505)
-# print(path)
+
+# result = openJsonMap(88084750)
+# a = Pathfinder()
+# a.SetMap(result, True)
+
+# path = a.GetPath(412, 235)
+# compressed = a.GetCompressedPath(412, 235)
+# print(compressed)
+
+# for p in path:
+# 	print(p.x, p.y)
+# 	for m in a.matrix:
+# 		location = a.matrix[m].Location
+# 		if location[0] == p.x and location[1] == p.y:
+# 			print(a.matrix[m])

@@ -1,6 +1,7 @@
 from ..utils.FileReader import FileReader
 from ..utils.Constants import Constants
 from ..utils.Sockets import Socket
+from ..Algorithm.PathFinder.Pathfinder import Pathfinder
 import time
 import json
 
@@ -8,10 +9,14 @@ class Map:
     def __init__(self, gui):
         print("HELLO from map")
         self.monsters = []
+        self.mapData = None
         self.mapId = 0
         self.subAreaId = 0
         self.fightStartCells = []
         self.Gui = gui
+
+        self.autoFight = False
+        self.monsterTargeted = None
 
         self.nonWalkableCells = []
         self.wallCells = []
@@ -19,6 +24,8 @@ class Map:
 
         self.nonWalkableCellList = []
         self.wallCellList = []
+
+        self.pathFinder = Pathfinder()
 
     def setMonsters(self, monsters):
         self.monsters = monsters.copy()
@@ -47,6 +54,7 @@ class Map:
 
         if action == 'mapHavenBagInformations':
             self.zaap = data['zaap']
+        
 
         if action == 'mapInformations':
             self.mapId = data['mapId']
@@ -54,6 +62,7 @@ class Map:
             self.setMonsters(data['monsters'])
             self.fightStartCells = data['fightStartCells']
             self.getNonWalkableCells(int(data['mapId']))
+            
             self.zaap = data['zaap']
             
         if action == 'updateActorPosition':
@@ -65,14 +74,24 @@ class Map:
         if action == 'removeElement':
             self.deleteMonster(data['id'])
         
+        if action == 'fightEnded':
+            print("------- fight ended : cell id player :", self.Gui.Player.cellId)
+        
         self.updateGUI()
+
+    
+
+
+    def PFSetMap(self):
+        self.pathFinder.SetMap(self.mapData, True)
 
     def getNonWalkableCells(self, mapId):
 
         self.wallCellList = []
         self.nonWalkableCellList = []
-        mapData = FileReader.openJsonMap(mapId)
-        mapDataCell = mapData['cells']
+        self.mapData = FileReader.openJsonMap(mapId)
+        self.pathFinder.SetMap(self.mapData, True)
+        mapDataCell = self.mapData['cells']
         
         nonWalkableLine = []
         wallLine = []
