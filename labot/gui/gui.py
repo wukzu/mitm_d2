@@ -286,20 +286,21 @@ class GUI(threading.Thread):
                 print("--- Initialize the windows")
                 self.Window = Window(self.gameVersion)
                 self.var.set("Initialized")
+            
+            print("action :::", action)
+            if action == self.callbackToWait:
+                #print("GUI  RECEIVED CALLBACK ", action)
+                print("GUI callback ", self.callbackToWait)
+                self.callbackToWait= ""
+                self.waitingVar.set(False)
             # if action == 'callback':
             #     print("[GUI] setting waiting to False")
             #     self.waitingVar.set(False)
-
 
             self.Map.socketHandler(action, infos)
             self.Player.socketHandler(action, infos)
             self.Fight.socketHandler(action, infos)
             self.Mount.socketHandler(action, infos)
-
             
-            if action == self.callbackToWait:
-                #print("GUI  RECEIVED CALLBACK ", action)
-                self.callbackToWait= ""
-                self.waitingVar.set(False)
 
         self.root.after(50, self.check_queue)

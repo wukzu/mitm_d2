@@ -89,11 +89,33 @@ def getCharacteristicType(characteristicId):
 
 def handleInventory(Bridge, name, data):
     if name == "InventoryContentMessage":
+        stamina = []
+        slap = []
+        caress = []
         for obj in data['objects']:
-            if obj['objectGID'] == 14722:
-                Bridge.qForm.put(('staminaUID', dictToString({
-                    'objectUID': obj['objectUID']
-                })))
+            if obj['objectGID'] == 14722: #foudroyeur
+                print("---- FOUDROYEUR :", obj)
+                for i in range(int(obj['quantity'])):
+                    stamina.append(obj['objectUID'])
+
+            if obj['objectGID'] == 14764: #carresseur
+                print("---- CARESSEUR :", obj)
+                for i in range(int(obj['quantity'])):
+                    caress.append(obj['objectUID'])
+
+            if obj['objectGID'] == 14737: #baffeur
+                print("---- BAFFEUR :", obj)
+                for i in range(int(obj['quantity'])):
+                    slap.append(obj['objectUID'])
+        
+        Bridge.qForm.put(('allPaddockObjects', dictToString({
+            'objects': {
+                'stamina': stamina,
+                'slap': slap,
+                'caress': caress,
+            }
+        })))
+
 
 
 
@@ -137,6 +159,7 @@ def handleMounts(Bridge, name, data):
         Bridge.qForm.put(('MountXpRatioMessage', ''))
 
     if name == "GameDataPaddockObjectRemoveMessage":
+        print("bridge : remove GameDataPaddockObjectRemoveMessage")
         Bridge.qForm.put(('GameDataPaddockObjectRemoveMessage', ''))
 
     if name == "GameDataPaddockObjectAddMessage":
@@ -688,7 +711,7 @@ class InjectorBridgeHandler(BridgeHandler):
                 % (msgType, parsedMsg, msg.data)
             )
 
-            if self.printLogs == True and protocol.msg_from_id[msg.id]["name"] not in self.blackList:
+            if self.printLogs == True and protocol.msg_from_id[msg.id]["name"] == "InventoryContentMessage": # and protocol.msg_from_id[msg.id]["name"] not in self.blackList:
                 if from_client:
                     logger.info(
                         ("-- SENT - [%(count)i] %(name)s (%(size)i Bytes)"),
