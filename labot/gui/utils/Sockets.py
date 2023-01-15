@@ -122,6 +122,39 @@ class Socket:
                 'monsterGroupId': monsterId
             }
         }))
+    
+    def leaveDialog():
+        return ("sendMessage", json.dumps({
+            'messageName': 'LeaveDialogRequestMessage',
+            'data': {}
+        }))
+    
+    def useObject(objectUID, cellId):
+        return ("sendMessage", json.dumps({
+            'messageName': 'ObjectUseOnCellMessage',
+            'data': {
+                'objectUID': objectUID,
+                'cells': cellId
+            }
+        }))
+    
+    def removeObject(cellId):
+        return ("sendMessage", json.dumps({
+            'messageName': 'PaddockRemoveItemRequestMessage',
+            'data': {
+                'cellId': cellId
+            }
+        }))
+
+    def openMountBrakmar():
+        return ("sendMessage", json.dumps({
+            'messageName': 'InteractiveUseRequestMessage',
+            'data': {
+                'elemId': 522915, 
+                'skillInstanceUid': 148804901
+            }
+        }))
+
         
     
     def offLogs():

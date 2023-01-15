@@ -87,6 +87,16 @@ def getCharacteristicType(characteristicId):
     else:
         return "NONE"
 
+def handleInventory(Bridge, name, data):
+    if name == "InventoryContentMessage":
+        for obj in data['objects']:
+            if obj['objectGID'] == 14722:
+                Bridge.qForm.put(('staminaUID', dictToString({
+                    'objectUID': obj['objectUID']
+                })))
+
+
+
 def handleMounts(Bridge, name, data):
 
     if name == "ExchangeStartOkMountWithOutPaddockMessage" or name == "ExchangeStartOkMountMessage":
@@ -126,12 +136,21 @@ def handleMounts(Bridge, name, data):
     if name == "MountXpRatioMessage":
         Bridge.qForm.put(('MountXpRatioMessage', ''))
 
+    if name == "GameDataPaddockObjectRemoveMessage":
+        Bridge.qForm.put(('GameDataPaddockObjectRemoveMessage', ''))
+
+    if name == "GameDataPaddockObjectAddMessage":
+        Bridge.qForm.put(('GameDataPaddockObjectAddMessage', ''))
+
+
+
 
 
 
 def handleMessage(Bridge, name, data):
 
     handleMounts(Bridge, name, data)
+    handleInventory(Bridge, name, data)
     #print ("---- Handle message Bridge :", str(name), data)
     if Bridge.waiting:
         if name == Bridge.waitingName:
@@ -578,14 +597,14 @@ class InjectorBridgeHandler(BridgeHandler):
         self.callbackMessage = None
 
         self.initialized = False
-        self.blackList = ['EmotePlayMessage', 'AchievementListMessage', 'ChatServerMessage', 'PrismsListMessage', 'FollowedQuestsMessage', 'QuestListMessage', 'AnomalySubareaInformationResponseMessage', 'ChatServerWithObjectMessage', 'GuildGetInformationsMessage', 'GameContextRefreshEntityLookMessage', 'SetCharacterRestrictionsMessage', 'GameRolePlayShowActorMessage']
+        self.blackList = ['ExchangeStartOkMountWithOutPaddockMessage', 'ExchangeStartOkMountMessage', 'EmotePlayMessage', 'AchievementListMessage', 'ChatServerMessage', 'PrismsListMessage', 'FollowedQuestsMessage', 'QuestListMessage', 'AnomalySubareaInformationResponseMessage', 'ChatServerWithObjectMessage', 'GuildGetInformationsMessage', 'GameContextRefreshEntityLookMessage', 'SetCharacterRestrictionsMessage', 'GameRolePlayShowActorMessage']
         self.whitelist = ['GameFightPlacementPositionRequestMessage', 'GameFightTurnFinishMessage']
         self.socketON = True
         self.lock = threading.Lock()
         self.packetThread = threading.Thread(target=self.queueHandle, args=())
         self.packetThread.start()
 
-        self.printLogs = False
+        self.printLogs = True
 
     def resetFightObj(self):
         self.fight = {

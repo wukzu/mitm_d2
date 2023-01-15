@@ -6,40 +6,40 @@ import numpy as np
 import math as Math
 
 
-cellUnwalkable = [
-  [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
-  [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
-  [0, 0 ,0, 0, 1 ,1, 0, 0 ,0, 0],
-  [0, 0 ,0, 1, 1 ,1, 0, 0 ,0, 0],
-  [0, 0 ,0, 1, 0 ,0, 0, 0 ,0, 0],
-  [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
-  [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
-  [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
-  [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
-  [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0]]
+# cellUnwalkable = [
+#   [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
+#   [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
+#   [0, 0 ,0, 0, 1 ,1, 0, 0 ,0, 0],
+#   [0, 0 ,0, 1, 1 ,1, 0, 0 ,0, 0],
+#   [0, 0 ,0, 1, 0 ,0, 0, 0 ,0, 0],
+#   [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
+#   [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
+#   [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
+#   [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
+#   [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0]]
 
 
-cellWall = [
-  [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
-  [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
-  [0, 0 ,0, 0, 1 ,0, 0, 0 ,0, 0],
-  [0, 0 ,0, 1, 1 ,0, 0, 0 ,0, 0],
-  [0, 0 ,0, 1, 0 ,0, 0, 0 ,0, 0],
-  [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
-  [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
-  [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
-  [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
-  [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0]]
+# cellWall = [
+#   [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
+#   [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
+#   [0, 0 ,0, 0, 1 ,0, 0, 0 ,0, 0],
+#   [0, 0 ,0, 1, 1 ,0, 0, 0 ,0, 0],
+#   [0, 0 ,0, 1, 0 ,0, 0, 0 ,0, 0],
+#   [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
+#   [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
+#   [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
+#   [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0],
+#   [0, 0 ,0, 0, 0 ,0, 0, 0 ,0, 0]]
 
-fromX = 5
-fromY = 5
+# fromX = 5
+# fromY = 5
 
-monsterX = 2
-monsterY = 3
+# monsterX = 2
+# monsterY = 3
 
-monsters = [[2, 3], [6, 3]]
+# monsters = [[2, 3], [6, 3]]
 
-path = Astar.search(cellUnwalkable, 1, [0, 0], [2, 2])
+# path = Astar.search(cellUnwalkable, 1, [0, 0], [2, 2])
 
 
 def getDistance(X1, Y1, X2, Y2):
@@ -47,6 +47,17 @@ def getDistance(X1, Y1, X2, Y2):
     return int(dist)
 
 def getMovementCells(player_pos, monster_pos, monsters, pm_left, cells_unwalkable):
+
+    # Vérifier s'il y a un monstre à coté de nous (donc taclé) :
+    for monster in monsters:
+        if ((monster[0] - 1 == player_pos[0] and monster[1] == player_pos[1]) or 
+            (monster[0] + 1 == player_pos[0] and monster[1] == player_pos[1]) or  
+            (monster[1] - 1 == player_pos[1] and monster[0] == player_pos[0]) or  
+            (monster[1] + 1 == player_pos[1] and monster[0] == player_pos[0])):
+            print("Erreur il y a un monstre à côté")
+            return -1
+            break
+
     player_movement_zone = []
         
     x = player_pos[0]
@@ -124,53 +135,53 @@ def getMovementCells(player_pos, monster_pos, monsters, pm_left, cells_unwalkabl
 
 
 
-unwalkableList = []
-for x in range(0, len(cellUnwalkable)):
-    for y in range(0, len(cellUnwalkable[x])):
-        if cellUnwalkable[x][y] == 1:
-            unwalkableList.append([x, y])
+# unwalkableList = []
+# for x in range(0, len(cellUnwalkable)):
+#     for y in range(0, len(cellUnwalkable[x])):
+#         if cellUnwalkable[x][y] == 1:
+#             unwalkableList.append([x, y])
 
-wallList = []
-for x in range(0, len(cellWall)):
-    for y in range(0, len(cellWall[x])):
-        if cellWall[x][y] == 1:
-            wallList.append([x, y])
+# wallList = []
+# for x in range(0, len(cellWall)):
+#     for y in range(0, len(cellWall[x])):
+#         if cellWall[x][y] == 1:
+#             wallList.append([x, y])
 
 
-spell = {
-  'align': True,
-  'id': 1,
-  'zone': [
-    [-1,-1, -1, -1, 0, -1, -1, -1, -1],
-    [-1,-1, -1, -1, 0, -1, -1, -1, -1],
-    [-1,-1, -1, -1, 0, -1, -1, -1, -1],
-    [-1,-1, -1, -1, 0, -1, -1, -1, -1],
-    [-1,-1, -1, -1, 1, -1, -1, -1, -1],
-    [-1,-1, -1, -1,-1, -1, -1, -1, -1],
-    [-1,-1, -1, -1,-1, -1, -1, -1, -1],
-    [-1,-1, -1, -1,-1, -1, -1, -1, -1],
-    [-1,-1, -1, -1,-1, -1, -1, -1, -1],
-  ],
+# spell = {
+#   'align': True,
+#   'id': 1,
 #   'zone': [
-#     [-1,-1, -1, -1,-1, -1, -1, -1, -1],
-#     [-1,-1, -1, -1,-1, -1, -1, -1, -1],
-#     [-1,-1, -1, -1, -1, -1, -1, -1, -1],
 #     [-1,-1, -1, -1, 0, -1, -1, -1, -1],
-#     [-1,-1, -1, 0, 1, -1, -1, -1, -1],
+#     [-1,-1, -1, -1, 0, -1, -1, -1, -1],
+#     [-1,-1, -1, -1, 0, -1, -1, -1, -1],
+#     [-1,-1, -1, -1, 0, -1, -1, -1, -1],
+#     [-1,-1, -1, -1, 1, -1, -1, -1, -1],
 #     [-1,-1, -1, -1,-1, -1, -1, -1, -1],
 #     [-1,-1, -1, -1,-1, -1, -1, -1, -1],
 #     [-1,-1, -1, -1,-1, -1, -1, -1, -1],
 #     [-1,-1, -1, -1,-1, -1, -1, -1, -1],
 #   ],
-  'POmin': 1,
-  'PO': 15
-} 
+# #   'zone': [
+# #     [-1,-1, -1, -1,-1, -1, -1, -1, -1],
+# #     [-1,-1, -1, -1,-1, -1, -1, -1, -1],
+# #     [-1,-1, -1, -1, -1, -1, -1, -1, -1],
+# #     [-1,-1, -1, -1, 0, -1, -1, -1, -1],
+# #     [-1,-1, -1, 0, 1, -1, -1, -1, -1],
+# #     [-1,-1, -1, -1,-1, -1, -1, -1, -1],
+# #     [-1,-1, -1, -1,-1, -1, -1, -1, -1],
+# #     [-1,-1, -1, -1,-1, -1, -1, -1, -1],
+# #     [-1,-1, -1, -1,-1, -1, -1, -1, -1],
+# #   ],
+#   'POmin': 1,
+#   'PO': 15
+# } 
 
-fichier = open("test.txt", "a")
+# fichier = open("test.txt", "a")
 
 class Movement:
 
-    def getMovementCells(fromPos, monsterPos, monsters, pmLeft, cellUnwalkable):
+    def _getMovementCells(fromPos, monsterPos, monsters, pmLeft, cellUnwalkable):
         return getMovementCells(fromPos, monsterPos, monsters, pmLeft, cellUnwalkable)
 
     def getMovementSpellCells(fromX, fromY, monsterX, monsterY, unwalkableList, wallList, spell, monsters, pmLeft, cellUnwalkable):

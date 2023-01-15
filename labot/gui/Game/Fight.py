@@ -120,12 +120,13 @@ class Fight:
             self.spellsCastedMonsters = []
             self.spellsCasted = []
             print('### fight turn start')
-            self.FightAlgorithm.actionHandle(action)
+            if self.fightRoutine == True:
+                self.FightAlgorithm.actionHandle(action)
         
         elif action == "allActionsFinished" and self.isFighting == True:
             print('(((((((((((((((( ALL ACTIONS FINISHED. Monsters :', self.monsters)
-            
-            self.FightAlgorithm.actionHandle(action)
+            if self.fightRoutine == True:
+                self.FightAlgorithm.actionHandle(action)
 
         
         

@@ -54,7 +54,6 @@ class FightAlgorithm:
     
 
     def setDatas(self):
-    
         print(Map.fightStartCells)
         print(Player.cellId)
         print(Fight.monsters)
@@ -78,9 +77,8 @@ class FightAlgorithm:
 
 
         cell = Movement.getStartPosition(fightStartPos, monstersPos)
-        print("RETURNED cell :", cell, Constants.cells_game[cell[0]][cell[1]])
         timeToWait = random.randint(300, 1500)
-        print("[FightAlgorithm] Attendre ", timeToWait)
+        
         self.Fight.waitTime(timeToWait)
         self.Player.moveToCellId(Constants.cells_game[cell[0]][cell[1]])
         
@@ -91,11 +89,8 @@ class FightAlgorithm:
 
     def actionHandle(self, action):
 
-        print("-------------- [FightAlgorithm] --------------------- action:", action, ' | count :', self.count)
         timeToWait = random.randint(300, 1000)
-        print("[FightAlgorithm] Attendre ", timeToWait)
         self.Fight.waitTime(timeToWait)
-        print("[FightAlgorithm] --------------------- OK")
         self.count = self.count + 1
 
         playerPosX = 0
@@ -109,7 +104,6 @@ class FightAlgorithm:
         for m in self.Fight.monsters: 
             monstersCells.append(m['cellId'])
 
-        #print("--- :", monstersCells)
         for x in range(0, len(Constants.cells_game)):
             for y in range(0, len(Constants.cells_game[x])):
                 if Constants.cells_game[x][y] != -1:
@@ -123,20 +117,15 @@ class FightAlgorithm:
         monsterToHitX = 0
         monsterToHitY = 0
 
-        # print("----------- ", playerPosX, playerPosY, playerFound)
-        # print("monster pos :", monstersPos)
-
         distanceList = {}
         
         for monster in monstersPos:
             distanceList[int(self.getDistance(playerPosX, playerPosY, monster[0], monster[1]))] = monster 
 
-        # print('--- distance list :', distanceList)
         
         key = min(list(distanceList.keys()))
         monsterToHitX = distanceList[int(key)][0]
         monsterToHitY = distanceList[int(key)][1]
-        # print('--- monsterToHit pos :', monsterToHitX, monsterToHitY)
         
 
         # ------------------------
@@ -153,35 +142,35 @@ class FightAlgorithm:
         ##############################################################################""
         #
         for spell in self.Player.spells:
-            print("checking spell ", spell['id'], spell['name'])
-            if self.countSpellsCasted(spell['id']) >= spell['maxPerTurn']:
-                print("Nombre max par tour atteint pour ce spell")
-                pass
-            
-            # print("/ --- spell :", spell['id'], " PA : ", spell['PA'], " | player PA :", self.Player.characteristics['PA'] )
-            # print("/ --- player pos :", playerPosX, playerPosY, " | monsterToHit :", monsterToHitX, monsterToHitY )
-            # print("/ --- monstersCells :", monstersCells)
-            if self.Player.characteristics['PA'] >= spell['PA']:
-                spellsToCast = Spell.getHitCells(playerPosX, playerPosY, monsterToHitX, monsterToHitY, self.Map.nonWalkableCellList, self.Map.wallCellList, spell, monstersPos)
-                if spellsToCast != -1:
-                    
-                    spellToCast = spellsToCast[0]
-                    cellId = Constants.cells_game[spellToCast['coords'][0]][spellToCast['coords'][1]]
-                    spellId = spellToCast['spellId']
+            print("checking spell without deplacement ", spell['id'], spell['name'])
+            if self.countSpellsCasted(spell['id']) < spell['maxPerTurn']:
+                
+                # print("/ --- spell :", spell['id'], " PA : ", spell['PA'], " | player PA :", self.Player.characteristics['PA'] )
+                # print("/ --- player pos :", playerPosX, playerPosY, " | monsterToHit :", monsterToHitX, monsterToHitY )
+                # print("/ --- monstersCells :", monstersCells)
+                if self.Player.characteristics['PA'] >= spell['PA']:
+                    spellsToCast = Spell.getHitCells(playerPosX, playerPosY, monsterToHitX, monsterToHitY, self.Map.nonWalkableCellList, self.Map.wallCellList, spell, monstersPos)
+                    if spellsToCast != -1:
+                        
+                        spellToCast = spellsToCast[0]
+                        cellId = Constants.cells_game[spellToCast['coords'][0]][spellToCast['coords'][1]]
+                        spellId = spellToCast['spellId']
 
-                    monsterId = self.Fight.getMonsterIdFromCellId(cellId)
+                        monsterId = self.Fight.getMonsterIdFromCellId(cellId)
 
-                    if self.countSpellsCastedMonster(spellId, monsterId) >= spell['maxPerTarget']:
-                        print("nombre maximum par target attenint pour ce spell")
-                        pass
+                        if self.countSpellsCastedMonster(spellId, monsterId) >= spell['maxPerTarget']:
+                            print("nombre maximum par target attenint pour ce spell")
+                            pass
+                        else:
+                            print("///// spell to cast :", spellId, cellId)
+                            self.Fight.useSpell(spellId, cellId)
+                            return
                     else:
-                        print("///// spell to cast :", spellId, cellId)
-                        self.Fight.useSpell(spellId, cellId)
-                        return
+                        print("aucun spell a utiliser")
                 else:
-                    print("aucun spell a utiliser")
+                    print("pas assez de PA")
             else:
-                print("pas assez de PA")
+                print("Nombre max par tour atteint pour ce spell")
         #
         ##############################################################################""
         ##############################################################################""
@@ -190,13 +179,13 @@ class FightAlgorithm:
 
 
         for spell in self.Player.spells:
-            print("checking spell ", spell['id'], spell['name'])
+            print("checking spell with deplacement ", spell['id'], spell['name'])
             if self.Player.characteristics['PA'] >= spell['PA'] and self.Player.characteristics['PM'] > 0:
                 #On regarde si un déplacement est possible pour pouvoir lancer un sors
                 deplacements = Movement.getMovementSpellCells(playerPosX, playerPosY, monsterToHitX, monsterToHitY, self.Map.nonWalkableCellList, self.Map.wallCellList, spell, monstersPos, self.Player.characteristics['PM'], self.Map.nonWalkableCells)
-                print('DEPLACEMENTS :', deplacements)
-
+                
                 if deplacements != -1:
+                    print("deplacement -1")
 
                     possibleDeplacements = []
                     for deplacement in deplacements:
@@ -229,8 +218,6 @@ class FightAlgorithm:
                                 'hits': possibleHits
                             })
                     
-                    print("possibleDeplacements :", possibleDeplacements)
-
                     if len(possibleDeplacements) != 0:
 
                         deplacementList = {}
@@ -265,7 +252,7 @@ class FightAlgorithm:
                     
         
         # # Impossible de lancer un sort, même en bougeant
-        if self.Player.characteristics['PM']:
+        if self.Player.characteristics['PM'] > 0:
         #     # Plus de PA mais encore des PM disponible,
             # ON s'enfuit ou on se rapproche en fonction de l'IA choisie
             # playerPos, monsterPos, [monsterPos], pmLeft, unwalkable, monsterToHitX, monsterToHitY

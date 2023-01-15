@@ -13,6 +13,10 @@ class Mount:
         self.isLove = False
         self.isMaturity = False
 
+        self.staminaObjectUID = 0
+
+        self.loveAndStamina = False
+
 
         self.mounts = []
         self.mountsToLevelUp = []
@@ -142,6 +146,7 @@ class Mount:
     def getMountsToLove(self):
         timeToWait = random.randint(50, 600)
         self.Gui.waitTime(timeToWait)
+        hasMountLeft = False
 
         for mount in self.stabledMounts:
             print("getMountsToCaress -------------------------- >>>>>>>>>> length paddock :", len(self.paddockedMounts))
@@ -151,6 +156,8 @@ class Mount:
             if (mount['boostLimiter'] < mount['boostMax'] and (mount['love'] < 7500 and
                 ((mount['sex'] == False and mount['serenity'] > 1000) or (mount['sex'] == True and mount['serenity'] > 0)))):
 
+                hasMountLeft = True
+
                 print("->>> mount to love :", mount)
                 self.Gui.qSocket.put(Socket.mountMoveStableToPaddock([mount['id']]))
                 
@@ -158,6 +165,9 @@ class Mount:
                 self.Gui.waitTime(timeToWait)
                 break
         
+        if not hasMountLeft and len(self.paddockedMounts) < 10 and self.loveAndStamina:
+            self.isLove = False
+            self.placeObjects()
         print("<----> ended mounts to paddock")
     
     
@@ -197,7 +207,6 @@ class Mount:
                 (mount['stamina'] > 7500 and mount['love'] > 7500 and mount['maturity'] < mount['maturityForAdult'] and 
                 ((mount['sex'] == False and mount['serenity'] > 1999) or (mount['sex'] == True and mount['serenity'] > 999)))):
                 needSlapping = needSlapping + 1
-                print("need to SLAP :", mount)
             
             if ((mount['love'] < 7500 and
                 ((mount['stamina'] > 7500 and ((mount['sex'] == True and mount['serenity'] < 0) or (mount['sex'] == False and mount['serenity'] < 1000))) or
@@ -206,17 +215,14 @@ class Mount:
                 (mount['stamina'] > 7500 and mount['love'] > 7500 and mount['maturity'] < mount['maturityForAdult'] and 
                 ((mount['sex'] == False and mount['serenity'] < -999) or (mount['sex'] == True and mount['serenity'] < -1999)))):
                 needCaressing = needCaressing + 1
-                print("need to CARESS :", mount)
             
             if (mount['stamina'] < 7500 and
                 ((mount['sex'] == False and mount['serenity'] < 0) or (mount['sex'] == True and mount['serenity'] < -1000))):
                 needStamina = needStamina + 1
-                print("need to STAMINA :", mount)
 
             if (mount['love'] < 7500 and
                 ((mount['sex'] == False and mount['serenity'] > 1000) or (mount['sex'] == True and mount['serenity'] > 0))):
                 needLove = needLove + 1
-                print("need to LOVE :", mount)
             
             if (mount['love'] > 7500 and mount['stamina'] > 7500 and mount['maturity'] < mount['maturityForAdult'] and
                 (((mount['sex'] == False and mount['serenity'] > -999 and mount['serenity'] < 1999) or
@@ -235,6 +241,9 @@ class Mount:
 
 
     def socketHandler(self, action, data):
+
+        if action == "staminaUID":
+            self.staminaObjectUID = data['objectUID']
         
         if action == "allMounts":
             self.mounts = data['mounts']
@@ -285,10 +294,6 @@ class Mount:
                 self.getMountsToStamina()
             elif self.isMaturity:
                 self.getMountsToMaturity()
-
-
-        
-        print("--- mounts stabble :", len(self.stabledMounts), " | mounts paddocked : ", len(self.paddockedMounts))
 
         if action == "mountBoostUpdated":
             print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> mount updated')
@@ -348,9 +353,57 @@ class Mount:
                 print('>> moving to stable')
                 self.Gui.qSocket.put(Socket.mountMovePaddockToStable([mount['id']]))
 
+    def waitRandomTime(self):
+        timeToWait = random.randint(300, 1500)
+        self.Gui.waitTime(timeToWait)
+
         
-        
-                
+    def placeObjects(self):
+        self.Gui.Window.clickCellIdWithDeltaX(41, 24) # Clique sur la croix
+        timeToWait = random.randint(2000, 5000)
+        self.Gui.waitTime(timeToWait)
+        #wait
+
+        self.Gui.qSocket.put(Socket.removeObject(342))
+        self.Gui.waitCallback("GameDataPaddockObjectRemoveMessage")
+        self.waitRandomTime()
+        self.Gui.qSocket.put(Socket.removeObject(356))
+        self.Gui.waitCallback("GameDataPaddockObjectRemoveMessage")
+        self.waitRandomTime()
+        self.Gui.qSocket.put(Socket.removeObject(315))
+        self.Gui.waitCallback("GameDataPaddockObjectRemoveMessage")
+        self.waitRandomTime()
+        self.Gui.qSocket.put(Socket.removeObject(329))
+        self.Gui.waitCallback("GameDataPaddockObjectRemoveMessage")
+        self.waitRandomTime()
+        self.Gui.qSocket.put(Socket.removeObject(357))
+        self.Gui.waitCallback("GameDataPaddockObjectRemoveMessage")
+        self.waitRandomTime()
+
+        self.Gui.qSocket.put(Socket.useObject(self.staminaObjectUID, 342))
+        self.Gui.waitCallback("GameDataPaddockObjectAddMessage")
+        self.waitRandomTime()
+        self.Gui.qSocket.put(Socket.useObject(self.staminaObjectUID, 356))
+        self.Gui.waitCallback("GameDataPaddockObjectAddMessage")
+        self.waitRandomTime()
+        self.Gui.qSocket.put(Socket.useObject(self.staminaObjectUID, 315))
+        self.Gui.waitCallback("GameDataPaddockObjectAddMessage")
+        self.waitRandomTime()
+        self.Gui.qSocket.put(Socket.useObject(self.staminaObjectUID, 329))
+        self.Gui.waitCallback("GameDataPaddockObjectAddMessage")
+        self.waitRandomTime()
+        self.Gui.qSocket.put(Socket.useObject(self.staminaObjectUID, 357))
+        self.Gui.waitCallback("GameDataPaddockObjectAddMessage")
+        self.waitRandomTime()
+
+        self.Gui.qSocket.put(Socket.openMountBrakmar())
+        self.Gui.waitCallback("allMounts")
+
+        timeToWait = random.randint(1000, 4000)
+        self.Gui.waitTime(timeToWait)
+        print("---------------- DONE")
+        #self.isStamina = True
+        #self.getMountsToStamina()
 
 
     def routeToUpMount(self):

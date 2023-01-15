@@ -138,7 +138,7 @@ monsterPos = [6, 3]
 monstersPos = [monsterPos, [6, 1]]
 distanceList = {}
 
-cells = Movement.getMovementCells(playerPos, monsterPos, [monsterPos], 4, unwalkable)
+cells = Movement._getMovementCells(playerPos, monsterPos, [monsterPos], 4, unwalkable)
 
 for monster in monstersPos:
     distanceList[int(getDistance(playerPos[0], playerPos[1], monsterPos[0], monsterPos[1]))] = monster 
