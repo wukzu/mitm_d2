@@ -213,9 +213,9 @@ class GUI(threading.Thread):
 
     def openDDWindow(self):
         self.DDWindow = tk.Toplevel(self.root)
-        self.DDWindow.title("New Window")
+        self.DDWindow.title("Dragodindes")
 
-        self.DDWindow.geometry("500x300")
+        self.DDWindow.geometry("400x900")
         tk.Label(self.DDWindow, text ="Dragodinde manager").pack()
         self.btnMountlapping =  tk.Button(self.DDWindow, text ="Start baffeurs", command = self.Mount.toggleSlapping)
         self.btnMountlapping.pack()
@@ -231,9 +231,19 @@ class GUI(threading.Thread):
         
         self.btnMountMaturity =  tk.Button(self.DDWindow, text ="Start maturié", command = self.Mount.toggleMaturity)
         self.btnMountMaturity.pack()
-
+        
+        self.btnCoach =  tk.Button(self.DDWindow, text ="Start Coach Sequence", command = self.Mount.nextCoachSequence)
+        self.btnCoach.pack()
+        
         self.lDDInfos = tk.Label(self.DDWindow, text = "-")
         self.lDDInfos.pack()
+
+        self.btnRefresh =  tk.Button(self.DDWindow, text ="Refresh", command = self.Mount.getMountsInfo)
+        self.btnRefresh.pack()
+
+        self.lDDSequenceInfos = tk.Label(self.DDWindow, text = "-")
+        self.lDDSequenceInfos.pack()
+
 
         self.sql_commands = tk.Text(self.DDWindow)
         self.sql_commands.insert(tk.INSERT, "#self.qSocket.put(('',''))")

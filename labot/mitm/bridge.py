@@ -87,33 +87,76 @@ def getCharacteristicType(characteristicId):
     else:
         return "NONE"
 
-def handleInventory(Bridge, name, data):
-    if name == "InventoryContentMessage":
-        stamina = []
-        slap = []
-        caress = []
-        for obj in data['objects']:
+def getPaddockItems(objects):
+
+    paddockItemsGID = [14722, 14764, 14746, 14737]
+
+    stamina = []
+    love = []
+    slap = []
+    caress = []
+
+    allObjects = []
+
+    for obj in objects:
+        if obj['objectGID'] in paddockItemsGID:
+            durability = 0
+            durabilityMax = 0
+            for effect in obj['effects']:
+                if effect['actionId'] == 812:
+                    durability = effect['diceNum']
+                    durabilityMax = effect['diceConst']
+                    break
+            
+            objType = ""
+
             if obj['objectGID'] == 14722: #foudroyeur
                 print("---- FOUDROYEUR :", obj)
-                for i in range(int(obj['quantity'])):
-                    stamina.append(obj['objectUID'])
+                objType = "stamina"
 
             if obj['objectGID'] == 14764: #carresseur
                 print("---- CARESSEUR :", obj)
-                for i in range(int(obj['quantity'])):
-                    caress.append(obj['objectUID'])
+                objType = "caress"
+            
+            if obj['objectGID'] == 14746: #dragofesse
+                print("---- DRAGOFESSE :", obj)
+                objType = "love"
 
             if obj['objectGID'] == 14737: #baffeur
                 print("---- BAFFEUR :", obj)
-                for i in range(int(obj['quantity'])):
-                    slap.append(obj['objectUID'])
-        
-        Bridge.qForm.put(('allPaddockObjects', dictToString({
-            'objects': {
-                'stamina': stamina,
-                'slap': slap,
-                'caress': caress,
-            }
+                objType = "slap"
+
+            for i in range(int(obj['quantity'])):
+                allObjects.append({
+                    'durability': durability,
+                    'durabilityMax': durabilityMax,
+                    'UID': obj['objectUID'],
+                    'type': objType
+                })
+
+    return allObjects
+
+
+def handleInventory(Bridge, name, data):
+    if name == "InventoryContentMessage":
+        Bridge.qForm.put(('allPaddockObjectsInventory', dictToString({
+            'objects': getPaddockItems(data['objects'])
+        })))
+
+    if name == "ObjectAddedMessage":
+        Bridge.qForm.put(('paddockObjectAddedInventory', dictToString({
+            'object': getPaddockItems([data['object']])[0]
+        })))
+    
+    if name == "ObjectDeletedMessage":
+        Bridge.qForm.put(('objectDeletedInventory', dictToString({
+            'object': data['objectUID']
+        })))
+    
+    if name == "ObjectQuantityMessage":
+        Bridge.qForm.put(('objectQuantityInventory', dictToString({
+            'objectUID': data['objectUID'],
+            'quantity': data['quantity']
         })))
 
 
@@ -627,7 +670,7 @@ class InjectorBridgeHandler(BridgeHandler):
         self.packetThread = threading.Thread(target=self.queueHandle, args=())
         self.packetThread.start()
 
-        self.printLogs = True
+        self.printLogs = False
 
     def resetFightObj(self):
         self.fight = {
@@ -711,7 +754,7 @@ class InjectorBridgeHandler(BridgeHandler):
                 % (msgType, parsedMsg, msg.data)
             )
 
-            if self.printLogs == True and protocol.msg_from_id[msg.id]["name"] == "InventoryContentMessage": # and protocol.msg_from_id[msg.id]["name"] not in self.blackList:
+            if self.printLogs == True and protocol.msg_from_id[msg.id]["name"] not in self.blackList:
                 if from_client:
                     logger.info(
                         ("-- SENT - [%(count)i] %(name)s (%(size)i Bytes)"),

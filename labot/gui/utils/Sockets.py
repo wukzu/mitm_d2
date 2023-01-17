@@ -151,7 +151,7 @@ class Socket:
             'messageName': 'InteractiveUseRequestMessage',
             'data': {
                 'elemId': 522915, 
-                'skillInstanceUid': 148804901
+                'skillInstanceUid': 148833883
             }
         }))
 
